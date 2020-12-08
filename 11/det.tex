@@ -1,0 +1,106 @@
+\section{Trace and Determinant}
+\begin{definition}
+    Let $A\in M_n(F)=M_{n,n}(F)$ be a square $n\times n$ matrix.
+    The trace of $A$ is defined to be
+    $$\operatorname{tr}A=\sum_{i=1}^nA_{ii}$$
+\end{definition}
+\begin{remark}
+    The map sending a matrix to its trace is a linear form.
+\end{remark}
+\begin{lemma}
+    $\operatorname{tr}(AB)=\operatorname{tr}(BA)$.
+\end{lemma}
+\begin{proof}
+    Write stuff out.
+\end{proof}
+\begin{corollary}
+    Similar matrices have the same trace.
+\end{corollary}
+\begin{proof}
+    $\operatorname{tr}(P^{-1}AP)=\operatorname{tr}(APP^{-1})=\operatorname{tr}(A)$.
+\end{proof}
+\begin{definition}
+    If $\alpha:V\to V$ is linear, then $\operatorname{tr}\alpha=\operatorname{tr}[\alpha]_B$ for any choice of basis $B$ of $V$.
+    It is well-defined by the preceding corollary.
+\end{definition}
+\begin{lemma}
+    Let $\alpha:V\to V$ be linear and $\alpha^\ast:V^\ast\to V^\ast$ be the dual map, then $\operatorname{tr}\alpha=\operatorname{tr}\alpha^\ast$.
+\end{lemma}
+\begin{proof}
+    Choose any basis $B$ of $V$, then
+    $$\operatorname{tr}\alpha=\operatorname{tr}[\alpha]_B=\operatorname{tr}[\alpha]_B^\top=\operatorname{tr}[\alpha^\ast]_{B^\ast}=\operatorname{tr}\alpha^\ast$$
+    as desired.
+\end{proof}
+Recall that we can decompose any permutation $\sigma\in S_n$ into a product of transpositions.
+\begin{definition}
+    The signature of a permutation is the (necessarily unique) homomorphism $\epsilon:S_n\to\{1,-1\}$ that sends any transposition to $-1$.
+\end{definition}
+This map $\epsilon$ is well-defined as we know that the parity of the number of transpositions that builds up a permutation is fixed.
+\begin{definition}
+    Let $A=(a_{ij})\in M_n(F)$.
+    We define the determinant of $A$ as
+    $$\det A=\sum_{\sigma\in S_n}\epsilon(\sigma)a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}$$
+\end{definition}
+\begin{example}
+    For $n=2$, we have
+    $$\det\begin{pmatrix}
+        a_{11}&a_{12}\\
+        a_{21}&a_{22}
+    \end{pmatrix}=a_{11}a_{22}-a_{12}a_{21}$$
+\end{example}
+\begin{lemma}
+    If $A=(a_{ij})$ is an upper (resp. lower) triangular matrix, i.e. $a_{ij}=0$ for $i>j$ (resp. $i<j$), then $\det A=0$.
+\end{lemma}
+\begin{proof}
+    The only permutation $\sigma$ such that $\sigma(j)\le j$ (resp. $\sigma(j)\ge j$) for all $j$ is the identity.
+\end{proof}
+\begin{lemma}
+    $\det A=\det A^\top$.
+\end{lemma}
+\begin{proof}
+    For any $\sigma\in S_n$ we know that $\epsilon(\sigma)=\epsilon(\sigma^{-1})$.
+\end{proof}
+\begin{definition}
+    A volumn form $d$ in $F^n$ is a function $(F^n)^n\to F$ such that:\\
+    1. It is multilinear:
+    For any $i\in\{1,\ldots,n\}$ and $v_1,\ldots,v_{i-1},v_{i+1},\ldots,v_n\in F^n$, the map
+    $$v\mapsto d(v_1,\ldots,v_{i-1},v,v_{i+1},\ldots,v_n\in F^n)$$
+    is linear.\\
+    2. It is an alternating form:
+    If $v_i=v_j$ for some $i\neq j$, then $d(v_1,\ldots,v_n)=0$.
+\end{definition}
+What we want to prove that there is only one volumn form (up to multiplicative constant).
+If this is true, then it necessarily equals $\det$ in the following way:
+\begin{lemma}
+    $\det$ is a volumn form via the obvious identification $M_n(F)=(F^n)^n$ by grouping the $n$ column vectors as a tuple.
+\end{lemma}
+\begin{proof}
+    $\det$ is linear as it is linear in any entry.
+    It is an alternating form as $\epsilon$ sends any transposition to $-1$.
+\end{proof}
+\begin{lemma}
+    Let $d$ be a volumn form, then swapping two entries changes the sign.
+\end{lemma}
+\begin{proof}
+    For any $i\neq j$, $d(v_1,\ldots,v_i,\ldots,v_j,\ldots,v_n)+ d(v_1,\ldots,v_j,\ldots,v_i,\ldots,v_n)= d(v_1,\ldots,v_i+v_j,\ldots,v_i+v_j,\ldots,v_n)=0$.
+\end{proof}
+\begin{corollary}
+    For any $\sigma\in S_n$ and volume form $d$,
+    $$d(v_{\sigma_1},\ldots,v_{\sigma_n})=\epsilon(\sigma)d(v_1,\ldots,v_n)$$
+\end{corollary}
+\begin{proof}
+    Just decompose $\sigma$ into transpositions.
+\end{proof}
+\begin{theorem}
+    Let $A\in M_n(F)$ and let $A^{(i)}$ be the $i^{th}$ column of $A$.
+    For any volumn form $d$, we have
+    $$d(A^{(1)},\ldots,A^{(n)})=\det(A)d(e_1,\ldots,e_n)$$
+    where $(e_i)_j=\delta_{ij}$.
+\end{theorem}
+This is what we wanted.
+\begin{proof}
+    Just expand using linearity and the preceding corollary.
+\end{proof}
+\begin{corollary}
+    $\det$ is the unique volumn form that maps $(e_1,\ldots,e_n)$ to $1$.
+\end{corollary}

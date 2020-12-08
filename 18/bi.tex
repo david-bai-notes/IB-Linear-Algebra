@@ -1,0 +1,84 @@
+\section{More on Bilinear Forms}
+Guess what?
+We are back to bilinear forms again!
+But this time, we are interested in bilinear forms $\phi:V\times V\to F$ for a finite dimensional vector space $V$ over $F$.
+For a basis $B$ of $V$, we write $[\phi]_B=[\phi]_{B,B}$.
+\begin{lemma}
+    Let $B,B'$ be bases of $V$ and $P=[\operatorname{id}]_{B',B}$, then $[\phi]_{B'}=P^\top[\phi]_BP$.
+\end{lemma}
+\begin{proof}
+    Proposition \ref{bilinear_change_of_basis}.
+\end{proof}
+\begin{definition}
+    Matrices $A,B\in M_n(F)$ are congruent if there is invertible $P$ such that $A=P^\top BP$.
+\end{definition}
+\begin{remark}
+    Easily congruence is an equivalence relation.
+\end{remark}
+\begin{definition}
+    A bilineart form $\phi$ in $V$ is symmetric if $\phi(u,v)=\phi(v,u)$ for any $u,v\in V$.
+\end{definition}
+\begin{remark}
+    $\phi$ is symmetric iff $[\phi]_B$ is symmetric in some basis $B$.\\
+    If we want to diagonalise $\phi$, then it has to be symmetric by the preceding lemma.
+\end{remark}
+\begin{definition}
+    A map $Q:V\to F$ is a quadratic form iff there exists a bilinear form $\phi:V\times V\to F$ such that $Q(u)=\phi(u,u)$.
+\end{definition}
+\begin{remark}
+    If $B=\{e_i\}$ and $A=[\phi]_B=(\phi(e_i,e_j))_{i,j}$, then for $u=\sum_ix_ie_i$ we have
+    $$Q(u)=\phi\left( \sum_{i=1}^nx_ie_i,\sum_{i=1}^nx_ie_i \right)=\sum_{i=1}^n\sum_{j=1}^nx_ix_j\phi(e_i,e_j)=x^\top Ax$$
+    where $x=(x_1,\ldots,x_n)^\top$.
+    Also observe that $x^\top Ax=x^\top Sx$ where $S=(A+A^\top)/2$ is symmetric.
+\end{remark}
+\begin{proposition}
+    If $Q:V\times V\to F$ is a quadratic form, then there exists a unique symmetric bilinear form $\phi:V\times V\to F$ such that $Q(u)=\phi(u,u)$ for all $u\in V$.
+\end{proposition}
+\begin{proof}
+    We know that $Q(u)=\psi(u,u)$ for some bilinear $\psi$.
+    Take $\phi=(\psi+\psi^\top)/2$ where $\psi^\top(u,v)=\psi(v,u)$ works.
+    To see it is unique, just observe that for a symmetric $\phi$,
+    $$Q(u+v)=\phi(u+v,u+v)=\phi(u,u)+2\phi(u,v)+\phi(v,v)$$
+    which implies that necessarily $\phi(u,v)=(Q(u+v)-Q(u)-Q(v))/2$ (known as the polarisation identity), so in particular $\phi$ is uniquely determined.
+\end{proof}
+\begin{theorem}[Diagonalisation of Bilinear Forms]\label{bilinear_diag}
+    Let $\phi:V\times V\to F$ be a symmetric bilinear form and $\dim V<\infty$, then there exists a basis of $V$ such that $[\phi]_B$ is diagonal.
+\end{theorem}
+\begin{proof}
+    We proceed by induction on $n=\dim V$.
+    If $\phi(u,u)=0$ for any $u\in V$, then $\phi$ is identically zero by the polarisation identity.
+    Otherwise, we can always find $u\in V\setminus\{0\}$ such that $\phi(u,u)\neq 0$.
+    Write $u=e_1$ and define
+    $$U=\langle \{e_i\}\rangle^\perp=\{v\in V:\phi(e_1,v)=0\}=\ker \phi(e_1,\cdot)$$
+    So $\dim U=n-1$ and $U+e_1=U\oplus e_1$.
+    Pick a basis $\{e_2,\ldots,e_n\}$ of $U$ such that $\phi|_U$ is diagonal in this basis, which is possible by induction hypothesis.
+    Then $\phi$ is diagonal in $\{e_1,\ldots,e_n\}$.
+\end{proof}
+\begin{example}
+    Take $V=\mathbb R^3$ and $Q(x)=x_1^2+x_2^2+2x_3^3+2x_1x_2+2x_1x_3-2x_2x_3$.
+    By inspection if we take
+    $$A=\begin{pmatrix}
+        1&1&1\\
+        1&1&-1\\
+        1&-1&2
+    \end{pmatrix}$$
+    then $Q(x)=x^\top Ax$.
+    Of course, we can follow the algorithm illustrated in the proof.
+    We can alternatively complete the square to get
+    \begin{align*}
+        Q(x)&=x_1^2+x_2^2+2x_3^3+2x_1x_2+2x_1x_3-2x_2x_3\\
+        &=(x_1+x_2+x_3)^2+(x_3-2x_2)^2-(2x)^2
+    \end{align*}
+    then under the new basis $x_1+x_2+x_3,x_3-2x_2,2x_2$, $A$ has the matrix
+    $$A'=\begin{pmatrix}
+        1&0&0\\
+        0&1&0\\
+        0&0&-1
+    \end{pmatrix}$$
+    More concretely, we have $A'=P^\top AP$ where
+    $$P=\begin{pmatrix}
+        1&1&1\\
+        0&-2&1\\
+        0&-2&0
+    \end{pmatrix}^{-1}$$
+\end{example}

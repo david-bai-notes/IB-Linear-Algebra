@@ -1,0 +1,132 @@
+\section{Spans, Linear Independence and Steinitz Exchange Lemma}
+In this section, we shall characterise the properties of the dimension and basis of a vector space.
+\begin{definition}[Span of a Family of Vectors]
+    Let $V$ be a vector space over $F$ and $S\subset V$.
+    We define the span of $S$ to be
+    $$\langle S\rangle=\operatorname{span}(S)=\left\{\sum_{i=1}^n\lambda_is_i:n\in\mathbb N,\lambda_i\in F,s_i\in S\right\}$$
+\end{definition}
+That is, $\langle S\rangle$ consists of all possible (finite) linear combination of elements of $S$.
+By convention, we say $\langle \varnothing\rangle=\{0\}$.
+Note also that the span of $S$ is essentially the minimal subspace of $V$ containing $S$.
+\begin{example}
+    1. Take $V=\mathbb R^3$ and
+    $$S=\left\{\begin{pmatrix}
+        1\\
+        0\\
+        0
+    \end{pmatrix},\begin{pmatrix}
+        0\\
+        1\\
+        2\\
+    \end{pmatrix},\begin{pmatrix}
+        3\\
+        -2\\
+        -4
+    \end{pmatrix}\right\}$$
+    then
+    $$\langle S\rangle=\left\{\begin{pmatrix}
+        a\\
+        b\\
+        2b
+    \end{pmatrix}:a,b\in\mathbb R\right\}$$
+    2. Take $V=\mathbb R^n$ and let $e_i$ be the vector in $V$ that only has $1$ at the $i^{th}$ entry and zero elsewhere, then $\langle \{e_i\}_{i=1}^n\rangle=V$.\\
+    3. Let $V=\mathbb R^X$ and $S_x:X\to\mathbb R$ be such that $S_x(y)=1_{x=y}$.
+    Then $\langle \{S_x\}_{x\in\mathbb R}\rangle$ are the set of functions $f\in\mathbb R^X$ that has finite support.
+\end{example}
+\begin{definition}
+    Let $V$ be a vector space over $F$ and $S\subset V$.
+    We say $S$ spans $V$ if $\langle S\rangle =V$.
+\end{definition}
+\begin{example}
+    Take $V=\mathbb R^2$, then any set of two non-parallel vectors would span $V$.
+\end{example}
+\begin{definition}
+    A vector space $V$ over a field $F$ is finite dimensional if there is a finite $S\subset V$ that spans $V$.
+\end{definition}
+\begin{example}
+    The space $V=\mathbb P[x]$ be the set of polynomials in $\mathbb R$ and $V_n=\mathbb P_n[x]$ be the set of real polynomials with degree at most $n$.
+    Then $V_n=\langle\{1,x,\ldots,x^n\}\rangle$ is finite dimensional, but $V$ is not finite dimensional as any finite set of polynomials must be contained in $V_n$ where $n$ is the maximal degree of polynomials in that set.
+\end{example}
+As $\mathbb N$ is well-ordered, there must be a minimum number of vectors that can possibly span $V$.
+We then focus on how to capture this minimality.
+\begin{definition}[(Linear) Independence]
+    Let $V$ be a vector space over $F$.
+    We say $\{v_1,\ldots,v_n\}\subset V$ are (linearly) independent (or is a free family) if for any $\lambda_1,\ldots,\lambda_n\in F$
+    $$\sum_{i=1}^n\lambda_iv_i=0\implies\forall i,\lambda_i=0$$
+    On the other hand, this set is not linearly independent if there exists $\lambda_1,\ldots,\lambda_n\in F$ not all zero such that $\sum_{i=1}^n\lambda_iv_i=0$.
+\end{definition}
+\begin{example}
+    Let $V=\mathbb R^3$ and
+    $$v_1=(1,0,0)^\top,v_2=(0,1,0)^\top,v_3=(1,1,0)^\top,v_4=(0,1,1)^\top$$
+    Then $\{v_1,v_2\}$ is linearly independent.
+    Note that $v_3\in\langle\{v_1,v_2\}\rangle$, so $\{v_1,v_2,v_3\}$ is not linearly independent.
+    On the other hand, $v_4\notin\langle\{v_1,v_2\}\rangle$, which as one can verify means that $\{v_1,v_2,v_4\}$ is linearly independent.
+\end{example}
+\begin{remark}
+    If the family $\{v_i\}_{1\le i\le n}$ is linearly independent, then none of $v_i$ is zero.
+\end{remark}
+\begin{definition}[Basis]
+    A subset $S\subset V$ is a basis if it is linearly independent and $\langle S\rangle=V$.
+\end{definition}
+\begin{remark}
+    When $S$ spans $V$, we say that $S$ is a generating family of $V$.
+    So a basis is just a linearly independent generating family.
+\end{remark}
+\begin{example}
+    1. Take $V=\mathbb R^n$, then the family $\{e_i\}_{1\le i\le n}$ where $e_i$ is the vector having $1$ at $i^{th}$ entry and zero otherwise is a basis.\\
+    2. Take $V=\mathbb C$ over $\mathbb C$, then $\{a\}$ is a basis for any $a\neq 0$.\\
+    3. Take also $V=\mathbb C$ but over $\mathbb R$, then $\{1,i\}$ is a basis.\\
+    4. Take $V=\mathbb P[x]$ be the set of polynomials in $\mathbb R$ and $S=\{x^n:n\ge 0\}$.
+    Then $S$ is a basis.
+    Worth noting that $|S|=\infty$ in this case.
+\end{example}
+\begin{lemma}
+    If $V$ is a vector space over $F$, then $\{v_1,\ldots,v_n\}$ is a basis of $V$ if and only if for any vector $v\in V$, there is a unique decomposition
+    $$v=\sum_{i=1}^n\lambda_iv_i$$
+\end{lemma}
+\begin{remark}
+    If the conditions are true, then the tuple $(\lambda_1,\ldots,\lambda_n)$ (ordered via the ordering one chose on $v_i$) is called the coordinate of $v$ in the basis $(v_i)$.
+\end{remark}
+\begin{proof}
+    Trivial.
+\end{proof}
+\begin{lemma}
+    If $S$ is a finite set that spans $V$, then a subset of $S$ is a basis of $V$.
+\end{lemma}
+\begin{proof}
+    If $S$ is independent, then we are done.
+    Otherwise, there is some $\lambda\neq 0$ and $\lambda_w$ such that there is $v\in S$ with
+    $$\lambda v+\sum_{w\in S\setminus\{v\}}\lambda_ww=0\implies v=\frac{1}{\lambda}\sum_{w\in S\setminus\{v\}}\lambda_ww\in\langle S\setminus\{v\}\rangle$$
+    Therefore $S\setminus\{v\}$ also spans $V$.
+    We can repeat this process and, by the well-ordering of $\mathbb N$, will reach a basis.
+\end{proof}
+\begin{theorem}[Steinitz Exchange Lemma]\label{steinitz}
+    Let $V$ be a finite dimensional vector space over $F$, $\{v_1,\ldots,v_m\}\subset V$ linearly independent, $\{w_1,\ldots,w_n\}\subset V$ a generating set, then:\\
+    1. $m\le n$.\\
+    2. Up to relabeling, $\{v_1,\ldots,v_m,w_{m+1},\ldots,w_n\}$ spans $V$.
+\end{theorem}
+\begin{proof}
+    Suppose $\{v_1,\ldots,v_l,w_{l+1},\ldots,w_n\}$ spans $V$ for some $l<m$, then
+    $$\exists\alpha_i,\beta_i\in F, v_{l+1}=\sum_{i\le l}\alpha_iv_i+\sum_{i>l}\beta_iw_i$$
+    But $\{v_i\}$ is linearly independent, so one of the $\beta_i$ is nonzero.
+    By relabelling $\beta_{l+1}\neq 0$, then $w_{l+1}\in\langle\{v_1,\ldots,v_l,v_{l+1},w_{l+2}\ldots,w_n\}\rangle$, therefore the set of vectors $\{v_1,\ldots,v_l,v_{l+1},w_{l+2}\ldots,w_n\}$ also spans $V$.
+    The theorem is then obvious by induction.
+\end{proof}
+\begin{corollary}\label{dim_well_defined}
+    Let $V$ be a finite dimensional vector space, then any two bases of $V$ have the same cardinality.
+\end{corollary}
+\begin{proof}
+    Immediate.
+\end{proof}
+This corollary allows us to give a proper definition of the dimension of a vector space.
+Before we step right into that, another corollary of Theorem \ref{steinitz} can help us to capture important properties of a finite dimensional vector space that will come in handy in further discussions of basis.
+\begin{corollary}
+    Let $V$ be a vector space with $\dim V=n$, then:\\
+    1. Any independent set of vectors has size at most $n$.
+    The size is exactly $n$ iff this set is a basis.\\
+    2. Any spanning set has size at least $n$.
+    The size is exactly $n$ iff this set is a basis.
+\end{corollary}
+\begin{proof}
+    Obvious.
+\end{proof}

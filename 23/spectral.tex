@@ -1,0 +1,56 @@
+\section{Spectral Theory}
+Spectral Theory is the study of spectrum (eigen-stuff) of operators, which is very important in boths maths and physics.
+Fix an inner product space $V$.
+Recall that an opeator $\alpha\in L(V)$ is self-adjoint if $\alpha=\alpha^\ast$.
+\begin{lemma}
+    A self-adjoint opeator $\alpha\in L(V)$ has real eigenvalues and eigenvectors with different eigenvalues are orthogonal.
+\end{lemma}
+\begin{proof}
+    If $v\neq 0$ and $\alpha(v)=\lambda v$, then $\lambda\|v\|^2=\langle \lambda v,v\rangle=\langle\alpha(v),v\rangle=\langle v,\alpha(v)\rangle=\langle v,\lambda(v)\rangle=\bar\lambda\|v\|^2$, so $\lambda=\bar\lambda\implies\lambda\in\mathbb R$.\\
+    Now if $v,w\neq 0,\lambda\neq\mu$ have $\alpha(v)=\lambda v,\alpha(w)=\mu w$, then $\lambda,\mu\in\mathbb R$ and hence $\lambda\langle v,w\rangle=\langle\alpha(v),w\rangle=\langle v,\alpha(w)\rangle=\langle v,\mu w\rangle=\bar\mu\langle v,w\rangle=\mu\langle v,w\rangle\implies\langle v,w\rangle=0$ since $\lambda\neq\mu$.
+\end{proof}
+\begin{theorem}[Spectral Theorem for Self-Adjoint Operators in Finite Dimensions]
+    Let $V$ be a finite dimensional inner product space over $F=\mathbb R$ or $\mathbb C$ and $\alpha\in L(V)$ is self-adjoint.
+    Then $V$ has an orthogonal basis of eigenvectors of $\alpha$.
+\end{theorem}
+Consequently, $\alpha$ can be diagonalised in an orthonormal basis of $V$.
+\begin{proof}
+    We proceed by induction on $n=\dim V$.
+    $n=1$ is trivial.
+    Now assume it is true for $n-1$.
+    Let $\lambda$ be a root of $\chi_A$ (exists by FTA).
+    Now $\lambda\in\mathbb R$ by the preceding lemma.
+    Choose $v\in V\setminus\{0\}$ such that $\alpha(v)=\lambda v$.
+    By normalising we can assume $v$ is unit.
+    Let $U=\langle \{v\}\rangle^\perp\le V$.
+    Then obviously $\alpha(U)\le U$ since $\langle\alpha(u),v\rangle=\langle u,\alpha(v)\rangle=\langle u,\lambda v\rangle=\bar\lambda\langle u,v\rangle=0$ for any $u\in U$.
+    Also $\dim U=n-1$.
+    Adding $v$ to the basis of $U$ in the induction hypothesis completes the induction process.
+\end{proof}
+\begin{corollary}
+    If $V$ is a finite dimensional inner product space and $\alpha\in L(V)$ is self-adjoint, then $V$ is the orthogonal direct sum of all the eigenspaces of $\alpha$.
+\end{corollary}
+\begin{proof}
+    Follows directly.
+\end{proof}
+Recall that $\alpha\in L(V)$ is an isometry iff $\alpha^\ast\circ\alpha=\operatorname{id}$.
+It is called unitary when $V$ is a vector space over $\mathbb C$.
+\begin{lemma}
+    Let $V$ be a complex inner product space and $\alpha\in L(V)$ be unitary.
+    Then:\\
+    (i) All eigenvalues of $\alpha$ are in the unit circle $S^1$.\\
+    (ii) Eigenvectors with distinct eigenvalues are orthogonal.
+\end{lemma}
+\begin{proof}
+    If $v\neq 0,\alpha(v)=\lambda v$ we have $\lambda\neq 0$ as $\alpha\neq 0$ and that $\lambda\|v\|^2=\langle\alpha(v),v\rangle=\langle v,\alpha^{-1}(v)\rangle=\langle v, \lambda^{-1}(v)\rangle=\bar{\lambda}^{-1}\|v\|^2$, so $\lambda\bar\lambda=1\implies\lambda\in S^1$.\\
+    Now if $v,w\neq 0$ and $\alpha(v)=\lambda v,\alpha(w)=\mu v$ for $\lambda\neq\mu$, then $\lambda\langle v,w\rangle=\langle\alpha(v),w\rangle=\langle v,\alpha^{-1}(w)\rangle=\langle v,\mu w\rangle=\bar{\mu}^{-1}\langle v,w\rangle=\mu\langle v,w\rangle\implies\langle v,w\rangle=0$.
+\end{proof}
+\begin{theorem}[Spectral Theorem for Unitary Operators in Finite Dimensions]
+    Let $V$ be a finite dimensional inner product space over $F=\mathbb C$ and $\alpha\in L(V)$ is unitary.
+    Then $V$ has an orthogonal basis of eigenvectors of $\alpha$.
+\end{theorem}
+Equivalently, $\alpha$ can be diagonalised in an orthonormal basis.
+\begin{proof}
+    Same idea as in the case for self-adjoint operators.
+\end{proof}
+Sadly, we cannot tell the same tale for real orthogonal matrices since it can have complex eigenvalues.

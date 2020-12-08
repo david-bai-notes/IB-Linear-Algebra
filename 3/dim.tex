@@ -1,0 +1,66 @@
+\section{Basis, Dimension and Direct Sum}
+\begin{definition}
+    This cardinality is called the dimenion $\dim V$ of $V$.
+\end{definition}
+This is well-defined due to Corollary \ref{dim_well_defined}.
+\begin{proposition}
+    Let $U,W$ be subspaces of $V$.
+    If they are finite dimensional, then so is $U+W$ and
+    $$\dim(U+W)=\dim U+\dim V-\dim(U\cap W)$$
+\end{proposition}
+\begin{proof}
+    Pick a basis $v_1,\ldots,v_l$ of $U\cap W$.
+    Extend it to a basis $v_1,\ldots,v_l,u_1,\ldots,u_m$ of $U$ and a basis $v_1,\ldots,v_l,w_1,\ldots,w_n$ of $W$, then $\{v_i\}\cup\{u_i\}\cup\{w_i\}$ is easily a basis of $U+W$.
+    The equality follows.
+\end{proof}
+\begin{proposition}
+    If $V$ is a finite dimensional vectyor space and $U\le V$, then $U,V/U$ are both finite dimensional and $\dim V=\dim U+\dim V/U$.
+    Furthermore,
+    $$\dim V=\dim U+\dim V/U$$
+\end{proposition}
+\begin{proof}
+    It is obvious that $U$ is finite dimensional.
+    Choose a basis $u_1,\ldots,u_l$ and extend it to a basis $u_1,\ldots,u_l,w_{l+1},\ldots,w_n$ of $V$, then $w_{l+1}+U,\ldots,w_n+U$ can be verified to be a basis of $V/U$.
+    The statement is immediate.
+\end{proof}
+\begin{remark}
+    If $U$ is a proper subspace of $V$, written $U<V$ (meaning that $U\le V$ and $U\neq V$), then the proposition gives us $\dim V/U\neq 0$, so $\dim U<\dim V$.
+\end{remark}
+\begin{definition}
+    Let $V$ be a vector space and $U,W\le V$.
+    We say $V$ is the direct sum of $U,W$, written $V=U\oplus W$, if every element $v\in V$ can be written uniquely as $v=u+w$ for $u\in U,w\in W$.\\
+    If this happens, then we say $W$ is a direct complement of $U$ in $V$.
+\end{definition}
+Note that direct complement is not unique in general.
+\begin{example}
+    Take $U=\mathbb R\times \{0\}$, then both $W=\{0\}\times \mathbb R$ and $W'=\langle\{(1,1)^\top\}\rangle$ are direct complements of $U$.
+\end{example}
+\begin{lemma}
+    Let $U,W\le V$, then the followings are equivalent:\\
+    1. $V=U\oplus W$.\\
+    2., $V=U+W$ and $U\cap W=\{0\}$.\\
+    3. For any basis $B_1$ of $U$ and $B_2$ of $W$, the union $B=B_1\cup B_2$ is a basis of $V$.
+\end{lemma}
+\begin{proof}
+    Trivial.
+\end{proof}
+\begin{definition}
+    Let $V_1,\ldots,V_l\le V$, then we define
+    $$\sum_{i=1}^lV_i=\{v_1+\cdots+v_l:v_j\in V_j,1\le j\le l\}$$
+    The sum is direct, i.e.
+    $$\sum_{i=1}^lV_i=\bigoplus_{i=1}^lV_i$$
+    iff $v_1+\cdots +v_l=v_1'+\cdots +v_l'$ implies $v_j=v_j'$ for any $1\le j\le l$ and $v_j\in V_j$.
+    Equivalently,
+    $$V=\bigoplus_{i=1}^lV_i\iff \forall v\in V,\exists!(v_1,\ldots,v_l)\in V_1\times\cdots\times V_l,v=\sum_{i=1}^lv_i$$
+\end{definition}
+\begin{proposition}
+    The followings are equivalent:\\
+    1.
+    $$\sum_{i=1}^lV_i=\bigoplus_{i=1}^lV_i$$
+    2. For any $i$,
+    $$V_i\cap\left( \sum_{j\neq i}V_j \right)=\{0\}$$
+    3. For any bases $B_i$ of $V_i$, the union $\bigcup_iB_i$ is a basis of $\sum_iV_i$.
+\end{proposition}
+\begin{proof}
+    Trivial.
+\end{proof}

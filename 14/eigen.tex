@@ -1,0 +1,98 @@
+\section{Eigenvectors, Eigenvalues and Diagonal Matrices}
+This is the first step into the wonderful land of diagonalisation of endomorphisms.
+Consider a vector space $V$ over $F$ with $\dim V=n<\infty$ and let $\alpha:V\to V$ be an endomorphism.
+The general problem is whether we can find a basis $B$ of $V$ such that $[\alpha]_B$ is in a nice enough form.
+In other words, by our change-of-basis formula, we want to know when can a matrix be conjugate to another matrix in a nice form.
+\begin{definition}
+    1. $\alpha\in L(V)=L(V,V)$ is diagonalisable if there exists a basis $B$ of $V$ such that $[\alpha]_B$ is diagonal, i.e. $([\alpha]_B)_{ij}=0$ for $i\neq j$.\\
+    2. $\alpha\in L(V)$ is triangulable if there exists a basis $B$ of $V$ such that $[\alpha]_B$ is (upper) triangular.
+\end{definition}
+\begin{remark}
+    A matrix is diagonalisable (resp. triangulable) iff it is conjugate to a diagonal (resp. triangular) matrix.
+\end{remark}
+\begin{definition}
+    1. $\lambda\in F$ is an eigenvalue of $\alpha$ if $\alpha(v)=\lambda v$ for some $v\neq 0$.\\
+    2. $v\in V$ is an eigenvector of $\alpha$ if $v\neq 0$ and there exists some $\lambda\in F$ such that $\alpha(v)=\lambda v$.\\
+    3. $V_\lambda=\{v\in V:\alpha(v)=\lambda v\}\le V$ is called the eigenspace of $\alpha$ associated to $\lambda$.
+\end{definition}
+\begin{lemma}
+    If $\alpha\in L(V)$ and $\lambda\in F$, then $\lambda$ is an eigenvalue iff $\det(\alpha-\lambda\operatorname{id}_V)=0$.
+\end{lemma}
+\begin{proof}
+    Follows from the fact that matrices with nonzero determinant have zero kernel.
+\end{proof}
+\begin{remark}
+    If $\alpha(v_j)=\lambda v_j$ for $v_j\neq 0$, then completing it into a basis $B=\{v_1,\ldots,v_j,\ldots,v_n\}$ of $V$ gives $([\alpha]_B)_{ij}=\lambda\delta_{ij}$.
+\end{remark}
+Recall that for a field $F$, a polynomail in $F$ is $f(t)=a_nt^n+\cdots+a_0\in F[t]$ with $a_i\in F$.
+Let $\deg f$ be the largest $m$ such that $a_m\neq 0$, then we know that $\deg(f+g)\le\max\{\deg f,\deg g\}$ and $\deg(fg)=\deg(f)+\deg(g)$.
+We say $\lambda$ is a root of $f$ iff $f(\lambda)=0$, and $g(t)$ divides $f(t)$ if there is some $q(t)\in F[t]$ such that $f(t)=g(t)q(t)$.
+\begin{lemma}
+    If $\lambda$ is a root of $f$, then $x-\lambda$ divides $f$.
+\end{lemma}
+\begin{proof}
+    Write $f(t)=f(t)-f(\lambda)$ and factrorise.
+\end{proof}
+\begin{remark}
+    We say $\lambda$ is a root of multiplicity $k$ if $(t-\lambda)^k$ divides $f$ but $(t-\lambda)^{k+1}$ does not.
+\end{remark}
+\begin{example}
+    $f(t)=(t-1)^2(t-2)^3$ has roots $1$ with multiplicity $2$ and $2$ with multiplicity $3$.
+\end{example}
+\begin{corollary}
+    A polynomial of degree $n$ has at most $n$ roots, counted with multiplicity.
+\end{corollary}
+\begin{proof}
+    Induction.
+\end{proof}
+\begin{corollary}
+    For polynomials $f_1,f_2$ of degree less than $n$ with $f_1(t_i)=f_2(t_i)$ for distinct $t_1,\ldots,t_n$, then $f_1=f_2$.
+\end{corollary}
+\begin{proof}
+    $\deg(f_1-f_2)<n$.
+\end{proof}
+\begin{theorem}[Fundamental Theorem of Algebra]
+    Any polynomial $f\in \mathbb C[t]$ of positive degree has a root.
+\end{theorem}
+\begin{proof}
+    Omitted.
+\end{proof}
+Consequently, $f$ has exactly $\deg f$ many roots counted with multplicity.
+This means that any $f\in\mathbb C[t]$ can be written as
+$$f(t)=c\prod_{i=1}^n(t-\lambda_i)^{\alpha_i},c,\lambda_i\in\mathbb C,\alpha_i\in\mathbb N, \sum_{i=1}^n\alpha_i=\deg f$$
+\begin{definition}
+    For $\alpha\in L(V)$, the characteristic polynomial of $\alpha$ is $\chi_\alpha(t)=\det(\alpha-t\operatorname{id}_V)\in F[t]$.
+\end{definition}
+\begin{remark}
+    Conjugate matrices then have the same characteristic polynomial.
+\end{remark}
+\begin{theorem}
+    $\alpha\in L(V)$ is triangulable iff
+    $$\chi_\alpha(t)=c\prod_{i=1}^n(t-\lambda_i)$$
+    for some $c,\lambda_i\in F$.
+\end{theorem}
+Consequently, any matrix in $\mathbb C$ is triangulable.
+\begin{proof}
+    The ``only if'' part is trivial.
+    For the ``if'' direction, we do induction on $n=\dim V$.
+    The $n=1$ case is trivial.
+    For $n>1$, there is $\lambda$ such that $\chi_\alpha(\lambda)=0$ by assumption.
+    Let $\{v_1,\ldots,v_k\}$ be a basis of $U=V_\lambda$ and extend it to a basis $B=\{v_1,\ldots,v_n\}$ of $V$.
+    We then have
+    $$[\alpha]_B=\left( \begin{array}{c|c}
+        I_k&\ast\\ \hline
+        0&C
+    \end{array} \right)$$
+    So the induced endomorphism $\bar\alpha:V/U\to V/U$ has matrix $C$ under the basis $\{v_{k+1}+U,\ldots,v_n+U\}$.
+    Then by the induction hypothesis, we can choose another set of basis $\{\tilde{v}_{k+1}+U,\ldots,\tilde{v}_n+U\}$ so that $C$ is triangular.
+    Hence $\alpha$ is triangular under the basis $\{v_1,\ldots,v_k,\tilde{v}_{k+1},\ldots,\tilde{v}_n\}$.
+    This completes the proof.
+\end{proof}
+\begin{lemma}
+    Suppose $V$ is a vector space over $F=\mathbb R$ or $\mathbb C$ such that $\dim V=n<\infty$ and suppose $\alpha\in L(V)$ is an endomorphism with matrix $A$.
+    Say $\chi_\alpha(t)=(-1)^nt^n+c_{n-1}t^{n-1}+\cdots+c_0$, then $c_0=\det A$, $c_{n-1}=(-1)^{n-1}\operatorname{tr}A$.
+\end{lemma}
+\begin{proof}
+    $\det A=\chi_A(0)=c_0$.
+    For $c_{n-1}$, note that the statement is true for triangular $A$, so we are done by the preceding theorem.
+\end{proof}

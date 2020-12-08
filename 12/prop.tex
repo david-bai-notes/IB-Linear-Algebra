@@ -1,0 +1,103 @@
+\section{Some Properties of Determinant}
+\begin{lemma}
+    Let $A,B$ be sqaure matrices, then $\det(AB)=\det(A)\det(B)$.
+\end{lemma}
+\begin{proof}
+    Direct expansion does the trick, but alternatively we can define $d_A$ via $d_A(B)=\det(AB)$ which is obviously a volume form.
+    Therefore $d_A(B)=d_A(I)\det(B)=\det(A)\det(B)$.
+\end{proof}
+\begin{definition}
+    Let $A\in M_n(F)$.
+    We say $A$ is singular if $\det A=0$, otherwise we say $A$ is nonsingular.
+\end{definition}
+\begin{lemma}
+    If $A$ is invertible then it is non-singular.
+\end{lemma}
+\begin{proof}
+    Suppose $B$ is an inverse of $A$, then $\det(A)\det(B)=\det(AB)=\det(I)=1\neq 0$ therefore $\det A\neq 0$.
+\end{proof}
+\begin{remark}
+    In particular $\det(A^{-1})=(\det A)^{-1}$ if $A$ is invertible.
+\end{remark}
+\begin{theorem}
+    Let $A\in M_n(F)$, the followings are equivalent:\\
+    1. $A$ is invertible.\\
+    2. $A$ is non-singular.\\
+    3. $r(A)=n$.
+\end{theorem}
+\begin{proof}
+    We just need to show (ii) implies (iii) since we have already done all others.
+    Suppose $r(A)<n$, then $\dim\operatorname{span}(A^{(1)},\ldots, A^{(n)})<n$, so there is some $\lambda_1,\ldots,\lambda_n$ not all zero such that $\sum_i\lambda_iA^{(i)}=0$.
+    In particular, there is some $j$ such that $\lambda_j\neq 0$ and hence $c_j=-\sum_{i\neq j}(\lambda_i/\lambda_j)A^{(i)}$.
+    Expand $\det A$ using multilinearity gives a linear combination of determinants with repeated entries, which is zero as $\det$ is an alternating form.
+\end{proof}
+\begin{remark}
+    By the theorem, it follows easily that the equation $Ax=y$ where $A\in M_n(F),x,y\in F^n$ has a unique solution iff $\det A\neq 0$.
+\end{remark}
+\begin{lemma}
+    Similar matrices have the same determinant.
+\end{lemma}
+\begin{proof}
+    $\det(PAP^{-1})=\det(P)\det(A)\det(P)^{-1}=\det(A)$ for any invertible $P$.
+\end{proof}
+Therefore the following definition makes sense.
+\begin{definition}
+    If $\alpha:V\to V$ be an endomorphism, then $\det\alpha=\det[\alpha_{B,B}]$ for any $B$ basis of $V$.
+\end{definition}
+\begin{theorem}
+    $\det:L(V,V)\to F$ satisfies:\\
+    1. $\det\operatorname{id}_V=1$.\\
+    2. $\det(\alpha\circ\beta)=\det(\beta)\det(\alpha)$.\\
+    3. $\det\alpha\neq 0$ iff $\alpha$ is invertible.
+    If indeed $\det\alpha\neq 0$, then $\det(\alpha^{-1})=(\det\alpha)^{-1}$.
+\end{theorem}
+\begin{proof}
+    Choose any basis and the rest follows from previous discussions.
+\end{proof}
+\begin{lemma}
+    Let $A\in M_k(F),B\in M_l(F),C\in M_{k,l}(F)$.
+    Consider
+    $$M_{k+l}(F)\ni M=\left( \begin{array}{c|c}
+        A&C\\ \hline
+        0&B
+    \end{array} \right)$$
+    Then $\det M=(\det A)(\det B)$.
+\end{lemma}
+\begin{proof}
+    Write $n=k+l$ and $M=(m_{ij})$.
+    Observe that $m_{\sigma(i)i}=0$ if $i\le k$ and $\sigma(i)>k$.
+    So for $m_{\sigma(1)1}\cdots m_{\sigma(n)n}\neq 0$, we must have the decomposition $\sigma_1\circ\sigma_2$ such that $\sigma_1$ fixes anything but $1,\ldots, k$ and $\sigma_2$ fixes anything but $k+1,\ldots,n$.
+    But then for such $\sigma$, we have $m_{\sigma(j)j}=a_{\sigma_1(j)j}$ for any $j\in\{1,\ldots,k\}$ and $m_{\sigma(j)j}=b_{\sigma_2(s)s}$ where $s=j-k$ for any $j\in\{k+1,\ldots,n\}$.
+    Observe also that $\epsilon(\sigma)=\epsilon(\sigma_1)\epsilon(\sigma_2)$, therefore
+    \begin{align*}
+        \det M&=\sum_{\sigma\in S_n}\epsilon(\sigma)m_{\sigma(1)1}\cdots m_{\sigma(n)n}\\
+        &=\sum_{\sigma_1\in S_k,\sigma_2\in S_l}\epsilon(\sigma_1)\epsilon(\sigma_2)a_{\sigma_1(1)1}\cdots a_{\sigma_1(k)k}b_{\sigma_2(1)1}\cdots b_{\sigma_2(l)l}\\
+        &=\sum_{\sigma_1\in S_k}\epsilon(\sigma_1)a_{\sigma_1(1)1}\cdots a_{\sigma_1(k)k}\sum_{\sigma_2\in S_l}\epsilon(\sigma_2)b_{\sigma_2(1)1}\cdots b_{\sigma_2(l)l}\\
+        &=(\det A)(\det B)
+    \end{align*}
+    as desired.
+\end{proof}
+\begin{corollary}
+    If $A_1,\ldots,A_k$ are square matrices, then
+    $$\det\begin{pmatrix}
+        A_1&&&\ast\\
+        &A_2&&\\
+        &&\ddots&\\
+        0&&&A_k
+    \end{pmatrix}=(\det A_1)(\det A_2)\cdots (\det A_k)$$
+\end{corollary}
+\begin{proof}
+    Induction on $k$.
+\end{proof}
+In particular,
+$$\det\begin{pmatrix}
+    \lambda_1&&&\ast\\
+    &\lambda_2&&\\
+    &&\ddots&\\
+    0&&&\lambda_k
+\end{pmatrix}=\lambda_1\cdots\lambda_k$$
+\begin{remark}
+    Why is it called a volume from?
+    Cconsider the volume form $(\mathbb R^3)^3\to F$ via $(a,b,c)\mapsto a\cdot(b\times c)$.
+    Then we know that geometrically this gives the (signed) volume of the parallelopiped formed by $a,b,c$.
+\end{remark}

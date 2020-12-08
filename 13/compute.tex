@@ -1,0 +1,110 @@
+\section{The Adjugate Matrix}
+Given a square matrix $A\in M_n(F)$ with columns $A^{(i)}$.
+If we swap two neighbouring columns (or rows), then $\det A$ changes sign.
+\begin{remark}
+    We can prove properties of determinant using the decomposition of $A$ into elementary matrices.
+\end{remark}
+A column expansion is a strategy to compute the determinant of a matrix by using its linkage to some of its submatrices.
+\begin{definition}
+    Let $A\in M_n(F)$ and pick $i,j\in\{1,\ldots,n\}$.
+    We define $A_{\widehat{ij}}\in A_{n-1}(F)$ to be the matrix obtained by deleting the $i^{th}$ row and $j^{th}$ column from $A$.
+\end{definition}
+\begin{example}
+    Take
+    $$A=\begin{pmatrix}
+        1&2&-7\\
+        2&1&0\\
+        -3&6&1
+    \end{pmatrix}$$
+    Then
+    $$A_{\widehat{32}}=\begin{pmatrix}
+        1&-7\\
+        2&0
+    \end{pmatrix}$$
+\end{example}
+\begin{lemma}[Expansion of Determinant]
+    Let $A\in M_n(F)$.\\
+    1. We have the expansion along the $j^{th}$ column
+    $$\det A=\sum_{i=1}^n(-1)^{i+j}a_{ij}\det A_{\widehat{ij}}$$
+    2. We have the expansion along the $i^{th}$ row
+    $$\det A=\sum_{j=1}^n(-1)^{i+j}a_{ij}\det A_{\widehat{ij}}$$
+\end{lemma}
+\begin{example}
+    Take
+    $$A=\begin{pmatrix}
+        1&2&-1\\
+        3&-1&1\\
+        4&2&-7
+    \end{pmatrix}$$
+    So expanding along the second column gives
+    $$\det A=-(2)\det\begin{pmatrix}
+        3&1\\
+        4&-7
+    \end{pmatrix}+(-1)\det\begin{pmatrix}
+        1&-1\\
+        4&-7
+    \end{pmatrix}-2\det\begin{pmatrix}
+        1&-1\\
+        3&1
+    \end{pmatrix}$$
+\end{example}
+\begin{proof}
+    Suffices to show the first part.
+    Pick $1\le j\le n$ and write $A=(a_{ij}),A^{(j)}=\sum_ia_{ij}e_i$.
+    Then
+    \begin{align*}
+        \det A&=\det\left( A^{(1)},\ldots,\sum_{i=1}^na_{ij}e_i ,\ldots, A^{(n)}\right)\\
+        &=\sum_{i=1}^na_{ij}\det(A^{(1)},\ldots,e_i,\ldots,A^{(n)})\\
+        &=\sum_{i=1}^na_{ij}(-1)^{j-1}\det(e_i,A^{(1)},\ldots,A^{(n)})\\
+        &=\sum_{i=1}^na_{ij}(-1)^{j-1}(-1)^{i-1}\det
+        \begin{pmatrix}
+            1&\ast&\cdots&\ast\\
+            0&&&\\
+            \vdots&&A_{\widehat{ij}}&\\
+            0&&&
+        \end{pmatrix}\\
+        &=\sum_{i=1}^n(-1)^{i+j}a_{ij}\det A_{\widehat{ij}}
+    \end{align*}
+    as desired.
+\end{proof}
+\begin{definition}
+    Let $A\in M_n(F)$, then the adjugate matrix $\operatorname{adj}A$ of $A$ is the $n\times n$ matrix with entries
+    $$(\operatorname{adj}A)_{ji}=(-1)^{i+j}\det A_{\widehat{ij}}=\det(A^{(1)},\ldots,A^{(j-1)},e_i,A^{(j+1)},\ldots,A^{(n)})$$
+\end{definition}
+\begin{theorem}
+    Let $A\in M_n(F)$, then $\operatorname{adj}(A)A=(\det A)I$ where $I$ is the identity matrix.
+\end{theorem}
+In particular, if $A$ is invertible, then as $\det A\neq 0$,
+$$A^{-1}=\frac{1}{\det A}\operatorname{adj}A$$
+\begin{proof}
+    For any $j$, the preceding lemma translates to
+    $$\det A=\sum_{i=1}^n(\operatorname{adj}A)_{ij}a_{ij}=(\operatorname{adj}(A)A)_{jj}$$
+    Now for $j<k$, let $A'$ be the matrix obtained by putting $A^{(k)}$ in the place of $A^{(j)}$, then
+    \begin{align*}
+        0&=\det(A')\\
+        &=\det(A^{(1)},\ldots,A^{(k)},\ldots,A^{(k)},\ldots,A^{(n)})\\
+        &=\det\left(A^{(1)},\ldots,\sum_{i=1}^na_{ik}e_i,\ldots,A^{(k)},\ldots,A^{(n)}\right)\\
+        &=\sum_{i=1}^na_{ik}\det(A^{(1)},\ldots,e_i,\ldots,A^{(k)},\ldots,A^{(n)})\\
+        &=\sum_{i=1}^na_{ik}(\operatorname{adj}A)_{ji}\\
+        &=(\operatorname{adj}(A)A)_{jk}
+    \end{align*}
+    which implies the result.
+\end{proof}
+\begin{proposition}
+    Let $A\in M_n(F)$ be invertible, and let $b\in F^n$, then the unique solution to $Ax=b$ is given by
+    $$x_i=\frac{1}{\det A}\det A_{\hat{i}b}$$
+    where $A_{\hat{i}b}$ is the matrix obtained by replacing the $i^{th}$ column of $A$ by $b$.
+\end{proposition}
+\begin{proof}
+    As $A$ is invertible, such an $x$ exists and is unique.
+    Let $x$ be a solution, then note that
+    \begin{align*}
+        \det(A_{\hat{i}b})&=\det(A^{(1)},\ldots,A^{(i-1)},b,A^{(i+1)},\ldots,A^{(n)})\\
+        &=\det(A^{(1)},\ldots,A^{(i-1)},Ax,A^{(i+1)},\ldots,A^{(n)})\\
+        &=\det\left(A^{(1)},\ldots,A^{(i-1)},\sum_{j=1}^nx_jA^{(j)},A^{(i+1)},\ldots,A^{(n)}\right)\\
+        &=\sum_{j=1}^nx_j\det(A^{(1)},\ldots,A^{(i-1)},A^{(j)},A^{(i+1)},\ldots,A^{(n)})\\
+        &=\sum_{j=1}^nx_j\delta_{ij}\det A\\
+        &=x_i\det A
+    \end{align*}
+    just as we wanted.
+\end{proof}

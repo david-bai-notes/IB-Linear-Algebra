@@ -1,0 +1,72 @@
+\section{Vector Spaces and Subspaces}
+Let $F$ be an arbitrary field.
+\begin{definition}
+    An $F$-vector space (or a vector space over $F$) is an abelian group $(V,+)$ equipped with a function $F\times V\to V,(\lambda,v)\mapsto \lambda v$ such that for any $v,v_1,v_2\in V,\lambda,\mu\in F$:\\
+    1. $\lambda(v_1+v_2)=\lambda v_1+\lambda v_2$.\\
+    2. $(\lambda_1+\lambda_2)v=\lambda_1v+\lambda_2v$.\\
+    3. $\lambda(\mu v)=(\lambda\mu v)$.\\
+    4. $1v=v$.\\
+    This function is often called scalar multiplication of the vector space.
+\end{definition}
+\begin{example}
+    1. Take $n\in\mathbb N$.
+    Then the set of $n$-tuples in $F$, denoted $F^n$, is a vector space under the operations
+    \begin{align*}
+        (x_1,\ldots,x_n)+(y_1,\ldots,y_n)&=(x_1+y_1,\ldots,x_n+y_n)\\
+        \lambda(x_1,\ldots,x_n)&=(\lambda x_1,\ldots,\lambda x_n)
+    \end{align*}
+    2. For any set $X$, write $\mathbb R^X=\{f:X\to\mathbb R\}$.
+    It is a vector space over $\mathbb R$ via
+    $$(f_1+f_2)(x)=f_1(x)+f_2(x),(\lambda f)(x)=\lambda f(x)$$
+    3. The set $M_{n,m}(F)$ consisting of $F$-valued $n\times m$ matrices is a vector space by interpreting it as $F^{n\times m}$.
+\end{example}
+\begin{remark}
+    The axioms of scalar multiplication imply that $0v=0$ for any $v\in V$, as one can check.
+\end{remark}
+\begin{definition}[Subspace]
+    Let $V$ be a vector space over $F$.
+    A subset $U\subset V$ is a subspace of $V$ (or $U\le V$ as vector spaces) iff $U\le V$ as subgroups and $\forall\lambda\in F,u\in U,\lambda u\in U$.
+\end{definition}
+So basically, a subgroup $U$ is a subspace if we can properly restrict the original scalar product to make it a vector space over $F$ as well.
+One can also check oneself that a subspace of a subspace is also a subspace of the original space.
+\begin{example}
+    Take $V=\mathbb R^{\mathbb R}$.
+    $C(\mathbb R)\le V$ (the set of continuous functions $\mathbb R\to\mathbb R$) is a subspace of $V$, and the set of polynomials is a subspace of $C(\mathbb R)$.\\
+    Take $V=\mathbb R^3$, then a line is a subspace iff it passes through the origin.
+    A plane is a subspace iff it passes through the origin as well.
+\end{example}
+\begin{proposition}
+    Let $V$ be an $F$-vector space and $U,W\le V$ as vector spaces, then $U\cap W\le V$ as vector spaces.
+\end{proposition}
+\begin{proof}
+    Just check.
+\end{proof}
+However, the union of two subspaces is generally not a subspace unless one is contained in the other already.
+\begin{example}
+    Take $V=\mathbb R^2$ and $U,W$ two axes, then $(1,0)+(0,1)=(1,1)$ is already not in the union.
+\end{example}
+\begin{definition}
+    Let $V$ be an $F$-vector space.
+    Let $U,W\le V$.
+    The sum of $U$ and $W$ is the set $U+W=\{u+w:u\in U, w\in W\}$.
+\end{definition}
+\begin{example}
+    Take $V=\mathbb R^2$ and $U,W$ two axes again, then $U+W=V$.
+\end{example}
+\begin{proposition}
+    The sum of two subspaces is a subspace.
+\end{proposition}
+\begin{proof}
+    Obvious.
+\end{proof}
+Just to mention, one can easily check that $U+W$ is the smallest subspace of $V$ containing $U$ and $W$.
+\begin{definition}
+    Let $V$ be an $F$-vector space and $U\le V$.
+    The quotient space $V/U$ is the quotient group equipped with the scalar multiplication $\lambda(v+U)=\lambda v+U$.
+\end{definition}
+\begin{proposition}
+    This scalar multiplication is well-defined and makes $V/U$ a vector space.
+\end{proposition}
+\begin{proof}
+    Just check.
+\end{proof}

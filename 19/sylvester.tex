@@ -1,0 +1,100 @@
+\section{Sylvester's Law, Sesquilinear Forms}
+We start by looking at some immediate corollaries of \ref{bilinear_diag}.
+\begin{corollary}
+    For a finite dimensional complex vector space $V$ and a symmetric bilinear form $\phi$ on $V$, there is a basis $B$ of $V$ such that
+    $$[\phi]_B=\begin{pmatrix}
+        I_r&0\\
+        0&0
+    \end{pmatrix}$$
+    where $r=r(\phi)$.
+\end{corollary}
+\begin{proof}
+    Square roots always exist as $F=\mathbb C$.
+\end{proof}
+\begin{corollary}
+    Every symmetric matrix in $\mathbb C$ is congruent to a unique matrix of the form
+    $$\begin{pmatrix}
+        I_r&0\\
+        0&0
+    \end{pmatrix}$$
+\end{corollary}
+\begin{proof}
+    Immediate.
+\end{proof}
+\begin{corollary}
+    If $F=\mathbb R$, $\dim V=n<\infty$ and $\phi$ a symmetric bilinear form of $V$, then there exists a basis $\{v_1,\ldots,v_n\}$ of $V$ such that
+    $$\begin{pmatrix}
+        I_p&&\\
+        &-I_q&\\
+        &&0
+    \end{pmatrix}$$
+\end{corollary}
+\begin{proof}
+    Every positive number in $\mathbb R$ has a square root.
+\end{proof}
+\begin{definition}
+    $s(\phi)=p-q$ is called the signature of the real symmetric bilinear form $\phi$.
+\end{definition}
+To see it is well-defined,
+\begin{theorem}[Sylvester's Law of Inertia].
+    If a real symmetric bilinear form $\phi$ has
+    $$[\phi]_B=\begin{pmatrix}
+        I_p&&\\
+        &-I_q&\\
+        &&0
+    \end{pmatrix},[\phi]_{B'}=\begin{pmatrix}
+        I_{p'}&&\\
+        &-I_{q'}&\\
+        &&0
+    \end{pmatrix}$$
+    then $p=p',q=q'$.
+\end{theorem}
+\begin{definition}
+    Let $\phi$ be a real symmetric bilinear form.
+    We say that $\phi$is positive semidefinite if $\phi(u,u)\ge 0$ for any $u\in V$, and is positive definite if $\phi(u,u)>0$ for any $u\in V\setminus\{0\}$.
+    Similarly, $\phi$ is positive semidefinite if $\forall u\in V,\phi(u,u)\le 0$ for any $u\in V$, and negative definite if $\forall u\in V\setminus\{0\},\phi(u,u)<0$.
+\end{definition}
+\begin{example}
+    The matrix
+    $$\begin{pmatrix}
+        I_p&0\\
+        0&0
+    \end{pmatrix}\in M_n(\mathbb R)$$
+    is always positive semidefinite, and is positive definite iff $p=n$.
+\end{example}
+\begin{proof}
+    Indeed $p$ is the largest dimension of subspace of $V$ in which $\phi$ is positive definite.
+    Similarly $q$ is the largest dimension of a subspace in which $q$ is negative definite.
+    These descriptions are independent of the choice of basis, so we are done
+\end{proof}
+\begin{definition}
+    The kernel of the bilinear form $\phi:V\times V\to F$ is the set $K(\phi)=\{v\in V:\forall u\in V,\phi(u,v)=0\}$.
+\end{definition}
+\begin{remark}
+    1. $\dim K+r(\phi)=0$.\\
+    2. For $F=\mathbb R$, we now know from the preceding theorem that there is a subspace $T$ of dimension $n-(p+q)+\min{p,q}$ such that $\phi|_T=0$.
+    More over, this can easily be shown to be the largest dimension such that such a subspace $T$ exists.
+\end{remark}
+Recall that the standard inner product on $\mathbb C^n$, that is
+$$\langle x,y\rangle=\sum_{i=1}^nx_i\bar{y}_i$$
+is not a bilinear form.
+\begin{definition}
+    Let $V,W$ be vector spaces over $\mathbb C$.
+    A map $\phi:V\times W\to\mathbb C$ is a sesquilinear form if for any $w\in W$, $\phi(\cdot,w)$ is linear and for any $v\in V,\lambda_1,\lambda_2\in \mathbb C,w_1,w_2\in W$,
+    $$\phi(v,\lambda_1w_1+\lambda_2w_2)=\bar{\lambda}_1\phi(v,w_1)+\bar\lambda_2\phi(v,w_2)$$
+\end{definition}
+\begin{definition}
+    With notation as above, for bases $B=\{v_1,\ldots,v_m\}$ of $V$ and $C=\{w_1,\ldots,w_n\}$ of $W$, the matrix of $\phi$ is $(\phi]_{B,C})_{ij}=(\phi(v_i,w_j))$.
+\end{definition}
+\begin{lemma}
+    $\phi(v,w)=[u]_B^\top [\phi]_{B,C}\overline{[v]}_C$.
+\end{lemma}
+\begin{proof}
+    Expand.
+\end{proof}
+\begin{lemma}
+    If $B,B'$ are bases of $V$ and $C,C'$ of $W$ and $P=[\operatorname{id}_V]_{B',B},Q=[\operatorname{id}_W]_{C',C}$, then $[\phi]_{B',C'}=P^\top[\phi]_{B,C}\bar{Q}$
+\end{lemma}
+\begin{proof}
+    Analogous to the bilinear case.
+\end{proof}

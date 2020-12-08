@@ -1,0 +1,85 @@
+\section{Gram-Schmidt and Orthogonal Complement}
+Here we only interested in inner product spaces over $F=\mathbb R$ or $\mathbb C$.
+\begin{lemma}[Cauchy-Schwartz Inequality]
+    $|\langle u,v\rangle|\le\|u\|\|v\|$.
+\end{lemma}
+In particular, equality hold iff $u,v$ are linearly dependent.
+\begin{proof}
+    For $t\in F$, expanding $\langle tu-v,tu-v\rangle \ge 0$ gives
+    $$0\le|t|^2\|u\|^2-2\operatorname{Re}(t\langle u,v\rangle)+\|v\|^2$$
+    Picking $t=\overline{\langle u,v\rangle}/\|u\|^2$ ends the proof.
+\end{proof}
+\begin{corollary}[Triangle Inequality]
+    $\|u+v\|\le \|u\|+\|v\|$.
+\end{corollary}
+Consequently $\|\cdot\|$ is a indeed a norm.
+\begin{proof}
+    Square both sides and use Cauchy-Schwartz.
+\end{proof}
+\begin{definition}
+    Fix an inner product $\langle\cdot,\cdot\rangle$.
+    A set $\{e_1,\ldots,e_k\}$ of vectors in $V$ is orthogonal if $\langle e_i,e_j\rangle=0$ for $i\neq j$ and orthonormal if in addition they all have norm $1$, that is $\langle e_i,e_j\rangle=\delta_{ij}$.
+\end{definition}
+Note that both notion depends on our choice of inner product.
+\begin{lemma}
+    A set of orthogonal vectors $e_1,\ldots,e_k$ has to be linearly independent.
+    In fact, if $v=\sum_i\lambda_ie_i$ then $\lambda_i=\langle v,e_i\rangle/\|e_i\|$.
+\end{lemma}
+\begin{proof}
+    Immediate from bilinearity.
+\end{proof}
+\begin{lemma}[Parseval's Identity]
+    If $V$ is a finite dimensional inner product space and $e_1,\ldots,e_n$ is an orthonormal basis, then
+    $$\langle u,v\rangle=\sum_{i=1}^n\langle u,e_i\rangle\overline{\langle v,e_i\rangle}$$
+\end{lemma}
+\begin{proof}
+    Obvious from the preceding lemma.
+\end{proof}
+In particular, in an orthogonal basis, $\|v\|^2=\sum_i|\langle v,e_i\rangle|^2$.
+Does an orthogonal basis always exist?
+\begin{theorem}[Gram-Schmidt Orthogonalisation]
+    If we have an inner product space $V$ and a sequence of linearly independent vectors $(v_i)_{i\in I}\in V$ where $I=\{1,2,\ldots\}$ (which may or may not terminate), then there exists a sequence $(e_i)_{i\in I}$ of orthonormal vectors such that $\langle v_1,\ldots,v_k\rangle=\langle e_1,\ldots,e_k\rangle$ for any $k\in I$.
+\end{theorem}
+\begin{proof}
+    We shall define $(e_i)$ inductively on $k$.
+    For $k=1$, just take $e_1=v_1/\|v_1\|$.
+    Say we have found $e_1,\ldots,e_k$, then define
+    $$e_{k+1}'=v_{k+1}-\sum_{i=1}^k\langle v_{k+1},e_i\rangle e_i,e_{k+1}=\frac{1}{|e_{k+1}'|}e_{k+1}'$$
+    This is well-defined as $(v_i)$ is linearly independent (so $e_{k+1}'\neq 0$) and it is easy to verify that $\langle v_1,\ldots,v_{k+1}\rangle=\langle e_1,\ldots,e_{k+1}\rangle$.
+    This completes the proof.
+\end{proof}
+So not only does there exists such a set of orthonormal vectors, we also get an algorithm to compute it.
+\begin{corollary}
+    Let $V$ be a finite dimensioanl inner product space, then any orthonormal set of vectors can be extend to an orthonormal basis of $V$.
+\end{corollary}
+\begin{proof}
+    Extend it to a basis, then apply the Gram-Schmidt algorithm (which fixes the original set).
+\end{proof}
+\begin{note}
+    A matrix $A\in M_{m,n}(F)$ has orthogonal columns if $A^\top\bar{A}=I$.
+\end{note}
+\begin{definition}
+    $A\in M_n(\mathbb R)$ is orthogonal if $A^\top A=I$.
+    $A\in M_n(\mathbb C)$ is unitary if $A^\top\bar{A}=I$.
+\end{definition}
+\begin{proposition}
+    Any nonsingular $A\in M_n(\mathbb R)$ (resp. $M_n(\mathbb C)$) can be written as $A=RT$ where $T$ is upper-triangular and $R$ is orthogonal (resp. unitary).
+\end{proposition}
+\begin{proof}
+    Do Gram-Schmidt on columns of $A$.
+\end{proof}
+\begin{definition}
+    Let $V$ be an inner product space and $V_1,V_2\le V$.
+    We say $V$ is the orthogonal sum of $V_1,V_2$ (written as $V=V_1\oplus^\perp V_2$) if $V=V_1\oplus V_2$ and $\forall v_1,\in V_1,v_2\in V_2$, we have $\langle v_1,v_2\rangle=0$.
+\end{definition}
+\begin{definition}
+    Let $V$ be an inner product space and $W\le V$.
+    We define $W^\perp=\{v\in V:\forall w\in W,\langle v,w\rangle=0\}$.
+\end{definition}
+\begin{lemma}
+    $W\oplus^\perp W^\perp=V$ if $V$ is finite dimensional.
+\end{lemma}
+\begin{proof}
+    Clearly $W^\perp\le V$ and by definition the sum $W+W^\perp$ is direct and orthogonal.
+    So it suffices to show that $V=W+W^\perp$, which is obvious since we can obtain a basis of $W^\perp$ of the right size by extending an orthonormal basis on $W$ orthonormally to $V$.
+\end{proof}

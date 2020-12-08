@@ -1,0 +1,80 @@
+\section{Diagonalisation Criterion and Minimal Polynomial}
+For a polynomial $p(t)\in F[t]$ in the form $p(t)=a_nt^n+\cdots+a_0$ for $a_i\in F$ and $A\in M_n(F)$, we define $p(A)=a_nA^n+\cdots +a_0I$.
+Similarly for $\alpha\in L(V)$, we write $p(\alpha)=a_n\alpha^n+\cdots+a_0\operatorname{id}_V$ where $\alpha^i$ is $\alpha$ composed with itself for $i$ times.
+\begin{theorem}\label{distinct_linear_diag}
+    Let $V$ be a finite-dimensional vector space over $F$ and $\alpha\in L(V)$.
+    Then $\alpha$ is diagonalisable iff there exists a polynomial $p\in F[t]$ which is the product of distinct linear factors in $F[t]$ such that $p(\alpha)=0$.
+\end{theorem}
+\begin{proof}
+    Suppose $\alpha$ is diagonalisable with distinct eigenvalues $\lambda_1,\ldots,\lambda_k$ which might or might not have unit multiplicity.
+    Then take $p(t)=(t-\lambda_1)\cdots (t-\lambda_k)$.
+    Let $B$ be the basis in which $\alpha$ is diagonal, then for any $v\in B$ we have $\alpha(v)=\lambda_iv$ for some $i$, which means $(\alpha-\lambda_i\operatorname{id}_V)v=0$.
+    Then note that the factors $\alpha-\lambda_i\operatorname{id}_V$ always commute with each other, which means $p(\alpha)v=0$ for all $v\in B$, hence $p(\alpha)=0$.\\
+    Conversely, suppose $p(\alpha)=0$ for some $p(t)=(t-\lambda_1)\cdots (t-\lambda_k)$ with $\lambda_i\neq\lambda_j$ whenever $i\neq j$.
+    Let $V_{\lambda_i}=\ker(\alpha-\lambda_i\operatorname{id}_V)$.
+    We claim that $V=\bigoplus_iV_{\lambda_i}$.
+    Indeed, take
+    $$q_j(t)=\prod_{i\neq j}\frac{t-\lambda_i}{\lambda_j-\lambda_i}$$
+    Then $q_j(\lambda_i)=\delta_{ij}$.
+    Consider $q(t)=q_1(t)+\cdots q_k(t)$, then $q$ has degree at most $k-1$ and $q(\lambda_i)=1$ for all $i$, which then means $q(t)=1$ for all $t$.
+    Let $\pi_j=q_j(\alpha)\in L(V)$, then by construction $\pi_1+\cdots +\pi_k=q(\alpha)=\operatorname{id}_V$, in other word $v$ is the sum of all $\pi_j(v)$.
+    Now,
+    $$(\alpha-\lambda_j\operatorname{id}_V)q_j(\alpha)(v)=\frac{1}{\prod_{i\neq j}(\lambda_j-\lambda_i)}p(\alpha)(v)=0$$
+    This means that for any $j$, $\pi_j(v)\in V_{\lambda_j}$ for any $v$, so $V$ is indeed the sum of all $V_{\lambda_i}$.\\
+    It remains to prove that the sum is direct.
+    Take $v\in V_{\lambda_j}\cap\sum_{i\neq j}V_{\lambda_i}$, then since $v\in V_{\lambda_j}$,
+    $$\pi_j(v)=\prod_{i\neq j}\frac{\lambda_j-\lambda_i}{\lambda_j-\lambda_i}v=v$$
+    But also $v\in \sum_{i\neq j}V_{\lambda_i}$, so $\pi_j(v)=0$, which implies $v=0$, so the sum is direct, and hence $\alpha$ is diagonalisable.
+\end{proof}
+\begin{remark}
+    We have shown in part of our proof above that if $\lambda_1,\ldots,\lambda_k$ are $k$ distinct eigenvalues of $\alpha$, then the sum $\sum_iV_{\lambda_i}$ is always direct.
+    So the only way diagonalisation fails is when the sum of eigenspaces is properly contained in $V$.
+\end{remark}
+\begin{corollary}
+    If $A\in M_n(\mathbb C)$ has finite order, then $A$ is diagonalisable.
+\end{corollary}
+\begin{proof}
+    $t^m-1$ is the product of $t-\zeta_m^j$ where $\zeta_m^j$ are the $m^{th}$ roots of unity.
+\end{proof}
+\begin{theorem}[Simultaneous Diagonalisation]
+    Let $\alpha,\beta\in L(V)$ be diagonalisable, then $\alpha,\beta$ are simultaneously diagonalisable, that is there exists a basis in which both matrices are diagonal, iff $\alpha,\beta$ commute.
+\end{theorem}
+\begin{proof}
+    If there is a basis $B$ in which $[\alpha]_B=D_1,[\beta]_B=D_2$ are diagonal matrices, then obviously $D_1,D_2$ commutes, thus so does $\alpha$ and $\beta$.\\
+    Conversely, if $\alpha,\beta$ are diagonalisable and commute, then $V=\bigoplus_iV_{\lambda_i}$ where $\lambda_i$ are distinct eigenvalues of $\alpha$.
+    Now $\beta(V_{\lambda_j})\le V_{\lambda_j}$ since for any $v\in V_{\lambda_j}$ we have $\alpha\circ\beta(v)=\beta\circ\alpha(v)=\beta(\lambda_j v)=\lambda_j\beta(v)$.
+    Take a polynomial $p$ that is the product of distinct linear factors such that $p(\beta)=0$.
+    Consequently $p(\beta|_{V_{\lambda_i}})=0$, so $\beta|_{V_{\lambda_i}}$ is diagonalisable.
+    Then the union of bases in $V_{\lambda_i}$ so that $\beta|_{V_{\lambda_i}}$ is diagonal is a basis of $V$ that makes $\alpha,\beta$ both diagonal.
+\end{proof}
+Recall that we can do division algorithm on polynomials, so if we have $a(t),b(t)\in F[t]$ for nonconstant $b$, we have $q(t),r(t)\in F[t]$ such that $\deg r<\deg b$ and $a=qb+r$.
+\begin{definition}
+    Let $V$ be a vector space over $F$ and $\alpha\in L(V)$.
+    A polynomial $m_\alpha(t)\in F[t]$ is a minimal polynomial of $\alpha$ if $m_\alpha(\alpha)=0$ and $\deg m_\alpha$ is minimal.
+\end{definition}
+\begin{remark}
+    This is well-defined as there must exists a polynomial $m(t)\in F[t]$ such that $m(\alpha)=0$ by considering the linearly dependent set $\{\operatorname{id},\alpha,\ldots,\alpha^{n^2}\}$ in $L(V)$.
+\end{remark}
+Note also that we have defined it as ``the'' minimal polynomial instead of ``a'' minimal polynomial.
+To justify it, we have
+\begin{lemma}
+    For $\alpha\in L(V)$, let $m_\alpha$ be a minimal polynomial of $\alpha$ and $p(t)\in F[t]$, then $p(\alpha)=0$ iff $m_\alpha|p$.
+\end{lemma}
+In particular, minimal polynomial is unique up to a nonzero constant.
+\begin{proof}
+    The ``if'' direction is trivial.
+    For the ``only if'' direction, we can write $p=m_\alpha q+r$ for some polynomials $q,r$ with $\deg r<\deg m_\alpha$.
+    But then by assumption $r(\alpha)=0$, so by minimality of $\deg m_\alpha$ we must have $r=0$, consequently $m_\alpha|p$.
+\end{proof}
+\begin{example}
+    Consider $V=F^2$ and
+    $$A=\begin{pmatrix}
+        1&0\\
+        0&1
+    \end{pmatrix},B=\begin{pmatrix}
+        1&1\\
+        0&1
+    \end{pmatrix}$$
+    They $m_A=t-1$ and $m_B=(t-1)^2$.
+    Consequenly $A$ is diagonalisable but $B$ is not.
+\end{example}

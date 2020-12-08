@@ -1,0 +1,102 @@
+\section{Hermitian Forms and Real Skew-Symmetric Forms}
+\begin{definition}
+    A sesquilinear form $\phi:V\times V\to\mathbb C$  is called Hermitian if $\phi(u,v)=\overline{\phi(v,u)}$.
+\end{definition}
+\begin{remark}
+    In particular, $\phi(u,u)=\overline{\phi(u,u)}$, so $\phi(u,u)$ is real.
+    Moreover, for any $\lambda\in\mathbb C$ we have $\phi(\lambda u,\lambda u)=|\lambda|^2\phi(u,u)$.
+    Therefore it makes sense to talk about positive/definite (semi)definite Hermitian forms.
+\end{remark}
+\begin{lemma}
+    A sesquilinear form $\phi:V\times V\to\mathbb C$ is Hermitian iff for any basis $B$ of $V$, $[\phi]_B=\overline{[\phi]}_B^\top$.
+\end{lemma}
+\begin{proof}
+    If $\phi$ is Hermitian, then write $A=[\phi]_B=(a_{ij})_{i,j}=(\phi(e_i,e_j))_{i,j}$ where we have $a_{ji}=\phi(e_j,e_i)=\overline{\phi(e_i,e_j)}=\bar{a}_{ij}$.
+    Conversely if $[\phi]_B=A$ with $A=(a_{ij})_{ij}=\bar{A}^\top$ and $u=\sum_i\lambda_ie_i,v=\sum_i\mu_ie_i$, then
+    \begin{align*}
+        \phi(u,v)&=\phi\left( \sum_{i=1}^n\lambda_ie_i,\sum_{j=1}^n\mu_je_j \right)=\sum_{i=1}^n\sum_{j=1}^n\lambda_i\bar\mu_ja_{ij}\\
+        &=\overline{\sum_{i=1}^n\sum_{j=1}^n\bar\lambda_i\mu_ja_{ji}}\\
+        &=\overline{\phi\left( \sum_{j=1}^n\mu_je_j,\sum_{i=1}^n\lambda_ie_i \right)}\\
+        &=\overline{\phi(v,u)}
+    \end{align*}
+    So $\phi$ is Hermitian.
+\end{proof}
+The polarisation identity becomes
+$$\phi(u,v)=\frac{1}{4}(Q(u+v)-Q(u-v)+iQ(u+iv)-iQ(u-iv))$$
+for a Hermitian $\phi$ and $Q(w)=\phi(w,w)$.
+\begin{theorem}[Hermitian Formulation of Sylvester's Law]
+    Let $V$ be an $n$-dimensional vector space over $\mathbb C$ and $\phi:V\times V\to\mathbb C$ a Hermitian form on $V$, then $V$ has a basis $\{v_1,\ldots,v_n\}$ such that
+    $$[\phi]_B=\begin{pmatrix}
+        I_p&&\\
+        &-I_q&\\
+        &&0
+    \end{pmatrix}$$
+    where $p,q$ depends only on $\phi$.
+\end{theorem}
+The proof is nearly identical to the real symmetric case.
+\begin{proof}
+    If $\phi=0$ then we are done.
+    Otherwise, by the polarisation identity, there exists $e_1\neq 0$ such that $\phi(e_1,e_1)\neq 0$.
+    Set $v_1=e_1/\sqrt{|\phi(e_1,e_1)|}$, then we get $\phi(v_1,v_1)=\pm 1$.
+    Consider $W=\{w\in V:\phi(v,w)=0\}$, then easily $V=\langle\{v_1\}\rangle\oplus W$.
+    Then we can do induction on the dimension to show that $\phi$ is diagonal in some basis, which implies the existence of $p,q$.
+    The uniqueness follows from the observation that $p$ (resp. $q$) is the minimal dimension of a subspace on which $\phi$ is positive (resp. negative) definite.
+\end{proof}
+\begin{definition}
+    Let $V$ be a vector space over $\mathbb R$.
+    A bilinear form on a real vector space is skew-symmetric if $\phi(u,v)=-\phi(v,u)$ for all $u,v\in V$.
+\end{definition}
+\begin{remark}
+    1. For any $u\in V$, $\phi(u,u)=-\phi(u,u)$ therefore $\phi(u,u)=0$.\\
+    2. The definition is equivalent to say that for any basis $B$ of $V$ we have $[\phi]_B=-[\phi]_B^\top$.\\
+    3. For any $A\in M_n(\mathbb R)$, we can decompose it
+    $$A=\frac{A+A^\top}{2}+\frac{A-A^\top}{2}$$
+    into symmetric and skew-symmetric parts.
+\end{remark}
+\begin{theorem}[Sylvester Form]
+    Let $\phi$ be a skew-symmetric bilinear form over a real vector space $V$ with $\dim V=n<\infty$, then there is a basis $B=\{v_1,w_1,\ldots,v_m,w_m,v_{2m+1},\ldots,v_n\}$ of $V$ such that
+    $$[\phi]_B=\begin{pmatrix}
+        A&&&\\
+        &\ddots&&\\
+        &&A&\\
+        &&&0
+    \end{pmatrix},A=\begin{pmatrix}
+        0&1\\
+        -1&0 
+    \end{pmatrix}$$
+    where there are $m$ copies of $A$.
+\end{theorem}
+\begin{proof}
+    Induction on $n$.
+    If $\phi=0$, then we are done.
+    Otherwise $\phi\neq 0$, so there is some $v_1,w_1$ such that $\phi(v_1,w_1)\neq 0$.
+    After rescaling we might as well assume that $\phi(v_1,w_1)=1$, so correspondingly $\phi(w_1,v_1)=-1$.
+    We know that $v_1,w_1$ has to be linearly independent as $\phi$ is skew-symmetric.
+    Let $U=\langle\{v_1,v_2\}\rangle$ and $W=\{v\in V:\phi(v_1,v)=\phi(w_1,v)=0\}$, then $V=U\oplus W$.
+    We are then done since we can use induction hypothesis on $W$ and $[\phi|_U]=A$.
+\end{proof}
+\begin{corollary}
+    Skew-symmetric bilinear forms have even rank.
+\end{corollary}
+\begin{proof}
+    Immediate.
+\end{proof}
+\begin{definition}
+    Let $V$ be a vector space over $\mathbb R$ (resp. $\mathbb C$).
+    An inner product on $V$ is a positive definite symmetric (resp. Hermitian) form $\phi$ on $V$.
+    The pair $(V,\phi)$ is then called a real (resp. complex) inner product space.
+\end{definition}
+Sometimes we write $\langle u,v\rangle=\phi(u,v)$ if it is understood.
+\begin{example}
+    In $\mathbb R^n$, the usual real scalar product is an inner product.\\
+    In $\mathbb C^n$, the usual complex scalar product is an inner product.\\
+    In $C([0,1],\mathbb C)$ (over $\mathbb C$), the form
+    $$\langle f,g\rangle=\int_0^1f(t)\overline{g(t)}w(t)\,\mathrm dt$$
+    is an inner product for any $w\in C([0,1],\mathbb R_+)$.
+\end{example}
+\begin{definition}
+    Let $\langle\cdot,\cdot\rangle$ be an inner product, its induced norm is $\|v\|=\sqrt{\langle v,v\rangle}$.
+\end{definition}
+\begin{remark}
+    $\|v\|\ge 0$ and the equality holds iff $v=0$.
+\end{remark}

@@ -1,0 +1,34 @@
+\section{Application to Bilinear Form}
+We want to analyse bilinear forms by our study in spectral theory.
+\begin{corollary}
+    Let $A\in M_n(F)$ for $F=\mathbb R$ (resp. $\mathbb C$) be a symmetric (resp. Hermitian) matrix, then there is an orthogonal (resp. unitary) matrix $P$ such that $P^\top AP$ is a real diagonal matrix.
+\end{corollary}
+\begin{proof}
+    Just take $P$ to be the basis of orthonormal eigenvectors that spans $V$ which exists by spectral theorem.
+\end{proof}
+\begin{corollary}
+    Let $V$ be a finite dimensional inner product space over $F=\mathbb R$ (resp. $\mathbb C$) and $\phi:V\times V\to F$ be a symmetric bilinear (resp. Hermitian) form.
+    Then there is an orthogonal basis of $V$ in which $\phi$ is diagonal.
+\end{corollary}
+\begin{proof}
+    Follows directly from the preceding corollary and the change-of-basis formula for bilinear/sesquilinear forms.
+\end{proof}
+\begin{remark}
+    The diagonal entries in above corollaries are, of course, the eigenvalues.
+\end{remark}
+\begin{corollary}[Simultaneous Diagonalisation]
+    et $V$ be a finite dimensional inner product space over $F=\mathbb R$ (resp. $\mathbb C$) and $\phi,\psi:V\times V\to F$ be symmetric bilinear (resp. Hermitian) forms.
+    Assume $\phi$ is positive definite, then there exists a basis of $V$ in which both are diagonalised.
+\end{corollary}
+\begin{proof}
+    Define a new scalar product by $\langle v,w\rangle=\phi(v,w)$ which works as $\phi$ is positive definite.
+    Then just take the basis to be the basis in which $\psi$ is diagonal under this new inner product.
+\end{proof}
+Note that in this new basis that we described, $\phi$ is actually represented the identity matrix.
+\begin{corollary}
+    Let $A,B\in M_n(F)$ where $F=\mathbb R$ (resp. $\mathbb C$).
+    Suppose they are both symmetric (resp. Hermitian) and assume that for any $x\neq 0,x^\top Ax>0$, then there exists $Q\in M_n(F)$ such that both $Q^\top AQ$ and $Q^\top BQ$ are diagonal.
+\end{corollary}
+\begin{proof}
+    Just a restatement of the preceding corollary.
+\end{proof}

@@ -1,0 +1,98 @@
+\section{Cayley-Hamilton Theorem and Multiplicity of Eigenvalues}
+\begin{theorem}[Cayley-Hamilton Theorem]
+    Let $V$ be a finite dimensional vector space over $F$ and $\alpha\in L(V)$ with characteristic polynomial $\chi_\alpha(t)=\det(\alpha-t\operatorname{id})$, then $\chi_\alpha(\alpha)=0$.
+\end{theorem}
+Consequently, $m_\alpha|\chi_\alpha$.
+\begin{proof}[Proof for $F=\mathbb C$]
+    We know that $\alpha$ is triangulable, so there is a basis $B$ such that it has matrix
+    $$[\alpha]_B=\begin{pmatrix}
+        a_1&&\ast\\
+        &\ddots&\\
+        0&&a_n
+    \end{pmatrix}$$
+    Therefore $\chi_\alpha(t)=(t-a_1)\cdots (t-a_n)$ (up to sign).
+    But then easily $\chi_\alpha(\alpha)=\chi_\alpha([\alpha]_B)=0$.
+\end{proof}
+\begin{proof}[Proof for the General Case]
+    For $A\in M_n(F)$, we write
+    $$(-1)^n\chi_A(t)=\det(t\operatorname{id}-A)=t^n+a_{n-1}t^{n-1}\cdots+a_0$$
+    for some $a_i\in F$.
+    Now if $\operatorname{adj}(t\operatorname{id}-A)=B_{n-1}t^{n-1}+\cdots B_0$ for matrices $B_i$, then
+    $$(t\operatorname{id}-A)(B_{n-1}t^{n-1}+\cdots B_0)=(t^n+a_{n-1}t^{n-1}\cdots+a_0)\operatorname{id}$$
+    Equating the coefficients gives
+    $$\operatorname{id}=B_{n-1},a_{n-1}\operatorname{id}=B_{n-2}-AB_{n-1},\ldots,a_0\operatorname{id}=-AB_n$$
+    Therefore
+    \begin{align*}
+        (-1)^n\chi_A(A)&=A^n+a_{n-1}A^{n-1}\cdots+a_0\operatorname{id}\\
+        &=A^nB_{n-1}+A^{n-1}(B_{n-2}-AB_{n-1})+\cdots+A^0(-AB_0)\\
+        &=0
+    \end{align*}
+    by telescoping.
+\end{proof}
+\begin{definition}
+    Let $\alpha\in L(V)$ and $\lambda$ an eigenvalue of $\alpha$, then the algebraic multiplicity $a_\lambda$ of $\lambda$ is the multiplicity of $\lambda$ as a root of $\chi_\alpha(t)$.\\
+    The geometric multiplicity $g_\lambda$ of $\lambda$ is $\dim\ker(\alpha-\lambda\operatorname{id})$.
+\end{definition}
+\begin{remark}
+    Obviously $a_\lambda,g_\lambda\ge 1$.
+\end{remark}
+\begin{lemma}\label{alg_geom_mult_ineq}
+    $g_\lambda\le a_\lambda$.
+\end{lemma}
+\begin{proof}
+    Let $\{v_1,\ldots,v_{g_\lambda}\}$ be a basis of $V_\lambda=\ker(\alpha-\lambda\operatorname{id})$ and extend it to a basis $B=\{v_i\}$ of $V$.
+    Then
+    $$[\alpha]_B=\begin{pmatrix}
+        \lambda\operatorname{id}_{g_\lambda}&\ast\\
+        0& A_1
+    \end{pmatrix}$$
+    for some $A_1$.
+    Then
+    $$\det(\alpha-\lambda\operatorname{id})=\det\begin{pmatrix}
+        (\lambda-t)\operatorname{id}_{g_\lambda}&\ast\\
+        0&A_1-t\operatorname{id}
+    \end{pmatrix}=(\lambda-t)^{g_\lambda}\chi_{A_1}(t)$$
+    which implies the claim.
+\end{proof}
+\begin{lemma}
+    Let $\lambda$ be an eigenvalue of $\alpha$ and write $c_\lambda$ as the multiplicity of $\lambda$ as a root of the minimal polynomial $m_\alpha$.
+    Then $1\le c_\lambda\le a_\lambda$.
+\end{lemma}
+\begin{proof}
+    $c_\lambda\le a_\lambda$ is obvious as $m_\alpha|\chi_\alpha$.
+    To see $c_\lambda\ge 1$, as $\lambda$ is an eigenvalue, we can find $v\neq 0$ such that $\alpha(v)=\lambda v$, so $\alpha^p(v)=\lambda^pv$.
+    Hence $0=m_\alpha(\alpha)v=(m_\alpha(\lambda))v$ which means $m_\alpha(\lambda)=0$, hence $c_\lambda\ge 1$.
+\end{proof}
+\begin{example}
+    1. Consider
+    $$A=\begin{pmatrix}
+        1&0&-2\\
+        0&1&1\\
+        0&0&2
+    \end{pmatrix}$$
+    then $\chi_A(t)=(t-1)^2(t-2)$.
+    So $m_A(t)$ is either $(t-1)^2(t-2)$ or $(t-1)(t-2)$ by the preceding lemma.
+    Indeed the latter works and has a smaller degree, hence $m_A(t)=(t-1)(t-2)$.\\
+    2. Let $A$ be the Jordan block
+    $$A=\begin{pmatrix}
+        \lambda&1&&\\
+        &\ddots&\ddots&\\
+        &&\lambda&1\\
+        &&&\lambda
+    \end{pmatrix}$$
+    Then as one can check, $g_\lambda=1,a_\lambda=c_\lambda=n$.\\
+    3. Tak $A=\lambda\operatorname{id}$, then $g_\lambda=a_\lambda=n$ and $c_\lambda=1$.
+\end{example}
+\begin{lemma}
+    Take $F=\mathbb C$, $V$ a finite dimensional vector space over $F$ and $\alpha\in L(V)$, then the followings are equivalent:\\
+    (i) $\alpha$ is diagonalisable.\\
+    (ii) For any eigenvalue $\lambda$ of $\alpha$ we have $a_\lambda=g_\lambda$.\\
+    (iii) For any eigenvalue $\lambda$ of $\alpha$ we have $c_\lambda=1$.
+\end{lemma}
+\begin{proof}
+    We already know that (i) is equivalent to (iii) by Theorem \ref{distinct_linear_diag}.
+    To see (i) is equivalent to (ii), let $\lambda_1,\ldots,\lambda_k$ be distinct eigenvalues of $\alpha$.
+    We have already seen that $\alpha$ is diagonalisable iff $V=\bigoplus_iV_{\lambda_i}$.
+    But $\dim V=n=\deg\chi_\alpha=\sum_ia_{\lambda_i}$ by FTA and $\dim\bigoplus_iV_{\lambda_i}=\sum_ig_\lambda$.
+    So $\alpha$ is diagonalisable iff $\sum_ig_{\lambda_i}=\sum_ia_{\lambda_i}$ iff $a_{\lambda_i}=g_{\lambda_i}$ for all $i$ by Lemma \ref{alg_geom_mult_ineq}.
+\end{proof}

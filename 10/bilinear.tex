@@ -1,0 +1,98 @@
+\section{Bilinar Forms}
+\begin{definition}
+    Let $U,V$ be vector spaces over $F$, then $\phi:U\times V\to F$ is a bilinear form if $\phi(u,\cdot)\in V^\ast$ and $\phi(\cdot,v)\in U^\ast$ for any $u\in U,v\in V$.
+\end{definition}
+We write $\phi_L\in L(U,V^\ast)$ to be the map $u\mapsto\phi(u,\cdot)$ and $\phi_R\in L(V,U^\ast)$ as $v\mapsto\phi(\cdot,v)$.
+In particular, $\phi_L(u)(v)=\phi(u,v)=\phi_R(v)(u)$.
+\begin{example}
+    1. The map $V\times V^\ast\to F$ via $(v,\theta)\mapsto \theta$ is a bilinear form.\\
+    2. The scalar product on $F^n$, that is
+    $$\left( \begin{pmatrix}
+        x_1\\
+        \vdots\\
+        x_n
+    \end{pmatrix}, \begin{pmatrix}
+        y_1\\
+        \vdots\\
+        y_n
+    \end{pmatrix}\right)\mapsto \sum_{i=1}^nx_iy_i$$
+    is a bilinear form.\\
+    3. Take $U=V=C([0,1],\mathbb R)$, then
+    $$(f,g)\mapsto\int_0^1f(t)g(t)\,\mathrm dt$$
+    is a bilinear form.
+\end{example}
+\begin{definition}
+    Take a basis $B=\{e_1,\ldots,e_m\}$ of $U$ and $C=\{f_1,\ldots,f_n\}$ basis of $V$ and $\phi:U\times V\to F$ a bilinear form, then the matrix of $\phi$ with respect to $B,C$ is
+    $$[\phi]_{B,C}=(\phi(e_i,f_j))_{1\le i\le m,1\le j\le n}$$
+\end{definition}
+\begin{lemma}
+    We have $\phi(u,v)=[u]_B^\top[\phi]_{B,C}[v]_C$ for any $u\in U,v\in V$.
+\end{lemma}
+\begin{proof}
+    If $u=\sum_i\lambda_ie_i$ and $v=\sum_j\mu_jf_j$, then by linearity,
+    $$\phi(u,v)=\sum_{i=1}^n\sum_{j=1}^n\lambda_i\mu_j\phi(e_i,f_j)=[u]_B^\top[\phi]_{B,C}[v]_C$$
+    by simple expansion.
+\end{proof}
+\begin{remark}
+    The matrix $[\phi]_{B,C}$ is the unique matrix such that the previous lemma holds.
+\end{remark}
+\begin{lemma}
+    Take a basis $B=\{e_1,\ldots,e_m\}$ of $U$ and the dual basis $B^\ast=\{\epsilon_1,\ldots,\epsilon_m\}$ of $U^\ast$.
+    Similarly take a basis $C=\{f_1,\ldots,f_n\}$ of $v$ and the dual basis $\{\eta_1,\ldots,\eta_n\}$ of $V^\ast$.
+    If $A=[\phi]_{B,C}$ where $\phi:U\times V\to F$ is a bilinear form, then $[\phi_R]_{C,B^\ast}=A$ and $[\phi_L]_{B,C^\ast}=A^\top$.
+\end{lemma}
+\begin{proof}
+    Completely trivial.
+\end{proof}
+\begin{definition}
+    $\ker\phi_L$ is called the left kernel of $\phi$ and $\ker\phi_R$ is called the right kernel of $\phi$.\\
+    $\phi$ is nondegenerate if both kernels are $\{0\}$.
+    Otherwise, we say $\phi$ is degenerate.
+\end{definition}
+\begin{lemma}
+    Let $B,C$ be bases of $U,V$ respectively and $\phi:U\times V\to F$ be bilinear.
+    Let $A=[\phi]_{B,C}$, then $\phi$ is nondegenerate iff $A$ is invertible.
+\end{lemma}
+\begin{proof}
+    Immediate from the preceding lemma.
+\end{proof}
+\begin{corollary}
+    If $\phi$ is nondegenerate, then $\dim U=\dim V$.
+\end{corollary}
+\begin{proof}
+    All invertible matrices are square.
+\end{proof}
+\begin{example}
+    So the dot product on $\mathbb R^n$ is nondegenerate.
+\end{example}
+\begin{corollary}
+    If $U,V$ are finite dimensional vector spaces over $F$, then choosing a nondegenerate bilinear form $U\times V\to F$ is just choosing an isomorphism $\phi_L:U\to V^\ast$.
+\end{corollary}
+\begin{proof}
+    Obvious.
+\end{proof}
+\begin{definition}
+    For $T\subset U$, we define $T^\perp=\{v\in V:\forall t\in T,\phi(t,v)=0\}$ and for $S\subset V$ we define ${}^\perp S=\{u\in U:\forall s\in S,\phi(u,s)=0\}$
+\end{definition}
+Of course we want to change the basis.
+\begin{proposition}\label{bilinear_change_of_basis}
+    Let $B,B'$ be bases of $U$ and $P=[\operatorname{id}]_{B',B}$ and $C,C'$ be basis of $V$ and $Q=[\operatorname{id}]_{C',C}$ and let $\phi:U\times V\to F$ be a bilinear form.
+    Then $[\phi]_{B',C'}=P^\top[\phi]_{B,C}Q$.
+\end{proposition}
+\begin{proof}
+    We have
+    $$\phi(u,v)=[u]_B^\top[\phi]_{B,C}[v]_C=(P[u]_{B'})^\top [\phi]_{B,C}(Q[v]_{C'})=[u]_{B'}^\top (P^\top[\phi]_{B,C}Q)[v]_{C'}$$
+    So necessarily $[\phi]_{B',C'}=P^\top[\phi]_{B,C}Q$.
+\end{proof}
+\begin{lemma}
+    The rank of the matrix of $\phi$ in any basis is fixed.
+\end{lemma}
+\begin{proof}
+    Immediate.
+\end{proof}
+\begin{definition}
+    The rank $r(\phi)$ of $\phi$ is the rank of its matrix in any basis.
+\end{definition}
+\begin{remark}
+    We have $r(\phi)=r(\phi_R)=r(\phi_L)$.
+\end{remark}

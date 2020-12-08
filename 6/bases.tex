@@ -1,0 +1,99 @@
+\section{Change of Basis and Equivalent Matrices}
+Consider vector spaces $V,W$ and $B=\{v_1,\ldots,v_n\}, B'=\{v_1',\ldots,v_n'\}$ bases of $V$, $C=\{w_1,\ldots,w_n\},C'=\{w_1',\ldots,w_n'\}$.
+Let $\alpha:V\to W$ be a linear map.
+We want to study the relationship between $[\alpha]_{B,C}$ and $[\alpha]_{B',C'}$.
+\begin{definition}
+    For a vector space $V$ with bases $B=\{v_1,\ldots,v_n\}, B'=\{v_1',\ldots,v_n'\}$, the change of basis matrix from $B'$ to $B$ is $P=(p_{ij})_{1\le i,j\le n}$ given by $p_{ij}=([v_j']_B)_i$.
+\end{definition}
+Indeed $P=[\operatorname{id}_V]_{B',B}$.
+\begin{lemma}
+    $[v]_B=P[v]_{B'}$.
+\end{lemma}
+\begin{proof}
+    $P[v]_{B'}=[\operatorname{id}_V]_{B',B}[v]_{B'}=[\operatorname{id}_V(v)]_B=[v]_B$.
+\end{proof}
+\begin{remark}
+    Let $P$ be the change of basis matrix from $B'$ to $B$, then $P$ is invertible and $P^{-1}$ is the change of basis matrix from $B'$ to $B$.
+\end{remark}
+So for the problem we stated at the start of this section, we write $P=[\operatorname{id}_V]_{B',B}$ and $Q=[\operatorname{id}_W]_{C',C}$, then
+\begin{proposition}
+    Let $A=[\alpha]_{B,C}$, $A'=[\alpha]_{B',C'}$ and $P,Q$ be as above, then $A'=Q^{-1}AP$.
+\end{proposition}
+\begin{proof}
+    For any $v\in V$, we evaluate
+    $$AP[v]_{B'}=[\alpha]_{B,C}[v]_B=[\alpha(v)]_C=Q[\alpha(v)]_{C'}=Q[\alpha]_{B',C'}[v]_B=QA'[v]_{B'}$$
+    So $AP=QA'$, which means $A'=Q^{-1}AP$.
+\end{proof}
+\begin{definition}[Equivalent Matrices]
+    Two matrices $A,A'\in M_{m,n}(F)$ are equivalent if $A'=Q^{-1}AP$ for some $Q\in M_{m,m},P\in M_{n,n}$ invertible.
+\end{definition}
+\begin{remark}
+    As one can check, this defines an equivalent relation.
+\end{remark}
+\begin{proposition}\label{eqv_form}
+    Let $V,W$ be vector spaces over $F$ and $\dim V=n,\dim W=m$.
+    Let $\alpha:V\to W$ be linear.
+    Then there exists bases $B$ of $V$ and $C$ of $W$ such that
+    $$[\alpha]_{B,C}=\left( \begin{array}{c|c}
+        I_r&0\\
+        \hline
+        0&0
+    \end{array} \right)$$
+    where $I_r$ is the identity matrix of dimension $r=n-n(\alpha)$.
+\end{proposition}
+\begin{proof}
+    Fix a basis $v_{r+1},\ldots,v_n$ of $\ker\alpha$ and extend it to a basis $B=\{v_1,\ldots,v_r\}$.
+    It is easy to see that $\alpha(v_1),\ldots,\alpha(v_r)$ gives a basis of $\operatorname{Im}\alpha$ as it is a spanning set that has the right size and that
+    $$\sum_{i=1}^r\lambda_i\alpha(v_i)=0\implies \alpha\left( \sum_{i=1}^r\lambda_iv_i \right)=0\implies\sum_{i=1}^r\lambda_iv_i\in\ker\alpha\implies \forall i,\lambda_i=0$$
+    Extend this to a basis $C$ of $W$, then $[\alpha]_{B,C}$ can be easily seen to have the right form.
+\end{proof}
+\begin{remark}
+    This provides another proof of the Rank-Nullity Theorem.
+\end{remark}
+\begin{corollary}
+    Any $m\times n$ matrix is equivalent to a matrix in the form illustrated in the preceding proposition.
+\end{corollary}
+\begin{proof}
+    Immediate.
+\end{proof}
+\begin{definition}
+    Let $A\in M_{m\times n}(F)$.
+    The column rank $r(A)$ of $A$ is the dimension of the subspace spanned by the columns of $A$ in $F^n$.
+    Similarly, the row rank of $A$ is the column rank of $A^T$.
+\end{definition}
+\begin{remark}
+    If $\alpha$ is a linear map represented by $A$ with respect to some basis, then $r(\alpha)=r(A)$.
+\end{remark}
+\begin{proposition}
+    Two matrices $A,A'$ of the same dimension are equivalent iff $r(A)=r(A')$.
+\end{proposition}
+\begin{proof}
+    Direct consequence of Proposition \ref{eqv_form} and the preceding remark.
+\end{proof}
+\begin{theorem}
+    $r(A)=r(A^T)$.
+\end{theorem}
+\begin{proof}
+    Let $r=r(A)$, so there are some invertible $Q,P$ of the right sizes such that
+    $$Q^{-1}AP=\left( \begin{array}{c|c}
+        I_r&0\\
+        \hline
+        0&0
+    \end{array} \right)$$
+    which is an $m\times n$ matrix.
+    But then
+    $$P^\top A^\top (Q^{\top})^{-1}=P^\top A^\top(Q^{-1})^\top=(Q^{-1}AP)^\top=\left( \begin{array}{c|c}
+        I_r&0\\
+        \hline
+        0&0
+    \end{array} \right)$$
+    as an $n\times m$ matrix.
+    So $r(A^\top)=r=r(A)$.
+\end{proof}
+In the case where $\alpha:V\to V$ is an endomomrphism, the change of basis formula becomes $A'=P^{-1}AP$ where $P$ is the change of basis matrix and $A',A$ are the matrices of $\alpha$ in the two different bases.
+This induces the following definition.
+\begin{definition}
+    Let $A,A'$ be square matrices.
+    We say $A,A'$ are similar (or conjugate) if there is an $n\times n$ invertible square matrix $P$ such that $A'=P^{-1}AP$
+\end{definition}
+This notion is central to the study of diagonalisation and spectral theory.

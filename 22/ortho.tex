@@ -1,0 +1,65 @@
+\section{Orthogonal Complement and Adjoint Map}
+\begin{definition}
+    Suppose $V=U\oplus W$.
+    The projection operator $\pi=\pi_W:V\to W$ into $W$ is defined via $u+w\mapsto w$ for any $u\in U,w\in W$.
+\end{definition}
+Easy to see that $\pi$ is linear and $\pi^2=\pi$
+\begin{remark}
+    We have $\pi_U=\operatorname{id}-\pi_W$.
+\end{remark}
+Of course, in the case where $U=W^\perp$, we can have something better.
+\begin{lemma}
+    Let $V$ be an inner product space and $W\le V$ finite dimensional subspace of $V$, then:\\
+    (a) If $\{e_i\}$ is an orthonormal basis of $W$, then $\forall v\in V,\pi(v)=\sum_i\langle v,e_i\rangle e_i$.\\
+    (b) $\forall v\in V,w\in W,\|v-\pi(v)\|\le\|v-w\|$ with equality iff $w=\pi(v)$.
+\end{lemma}
+\begin{proof}
+    Just observe that $v-\pi(v)\in W^\perp$ which is known to be a complementary subspace of $W$.
+    This gives (a) immediately, and for (b) we have $\|v-w\|^2=\|v-\pi(v)+\pi(v)-w\|^2=\|v-\pi(v)\|^2+\|\pi(v)-w\|^2\ge \|v-\pi(v)\|$.
+\end{proof}
+\begin{proposition}
+    Let $V,W$ be finite dimensional inner product spaces and $\alpha\in L(V,W)$.
+    Then there is a unique linear map $\alpha^\ast:W\to V$ such that $\forall v\in V,w\in W,\langle \alpha(v),w\rangle=\langle v,\alpha^\ast(w)\rangle$.
+    Moreover, if $B,C$ are orthonormal bases of $V,W$, then $[\alpha^\ast]_{C,B}=(\overline{[\alpha]}_{B,C})^\top$.
+\end{proposition}
+\begin{proof}
+    Brute-force computation.
+\end{proof}
+\begin{definition}
+    This map $\alpha^\ast$ is called the adjoint of $\alpha$.
+\end{definition}
+\begin{remark}
+    One might notice that we used the same notation for adjoint and dual of a map.
+    This (intentional) abuse of notation can be justified by considering the linear isomorphisms $\psi_{R,V}:V\to V^\ast,\psi_{R,W}:W\to W^\ast$ via $\psi_{R,V}(v)=\langle \cdot,v\rangle,\psi_{R,W}(w)=\langle \cdot,w\rangle$ which immediately satisfies $\alpha^\ast_{\rm adjoint}=\psi_{R,V}^{-1}\circ\alpha^\ast_{\rm dual}\circ\psi_{R,W}$.
+    \[
+        \begin{tikzcd}
+            W^\ast\arrow{r}{\alpha^\ast_{\rm dual}}&V^\ast\\
+            W\arrow{u}{\psi_{R,W}}\arrow[swap]{r}{\alpha^\ast_{\rm adjoint}}&V\arrow[swap]{u}{\psi_{R,V}}
+        \end{tikzcd}
+    \]
+\end{remark}
+\begin{definition}
+    Let $V$ be an inner product space.
+    A map $\alpha\in L(V)$ is self-adjoint if $\alpha=\alpha^\ast$, i.e. $\forall v,w\in V,\langle\alpha(v),w\rangle=\langle v,\alpha(w)\rangle$.\\
+    It is called an isometry if $\alpha^\ast\circ\alpha=\operatorname{id}$, or $\langle\alpha(v),\alpha(w)\rangle=\langle v,w\rangle$ for any $v,w\in V$.
+\end{definition}
+\begin{remark}
+    By the polarisation identity, $\alpha$ is an isometry iff $\|\alpha(v)\|=\|v\|$ for any $v\in V$.
+\end{remark}
+\begin{lemma}
+    Let $V$ be a finite dimensional inner product space over $\mathbb R$ (resp. $\mathbb C$).
+    Then $\alpha\in L(V)$ is self-adjoint iff for any orthonormal basis $B$ of $V$, $[\alpha]_B$ is symmetric (resp. Hemitian).
+    It is an isometry iff for any orthonormal basis $B$ of $V$, $[\alpha]_B$ is orthonormal (resp. unitary).
+\end{lemma}
+\begin{proof}
+    Immediate.
+\end{proof}
+The collection of isometries are naturally subgroups of $L(V)$.
+\begin{definition}
+    Let $V$ be a finite dimensional inner product space over a field $F=\mathbb R$ or $\mathbb C$.
+    The subgroup of isometries $\{\alpha\in L(V):\alpha^\ast\circ\alpha=\operatorname{id}\}\le L(V)$ is called the orthogonal group $O(V)$ of $V$ when $F=\mathbb R$ and the unitary group $U(V)$ of $V$ when $F=\mathbb C$.
+\end{definition}
+\begin{remark}
+    Fix an orthonormal basis $\{e_i\}$ of $V$.
+    Then there is a one-to-one correspondence between the isometries in $V$ and the orthonormal bases of $V$ via $\alpha\leftrightarrow \{\alpha(e_i)\}$.
+\end{remark}

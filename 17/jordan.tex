@@ -1,0 +1,126 @@
+\section{The Jordan Normal Form}
+We are interested in how nice a matrix can an arbitrary $\alpha\in L(\mathbb C^n)$ possibly have.
+\begin{definition}
+    Let $A\in M_n(\mathbb C)$.
+    We say $A$ is in Jordan Normal Form (JNF) if it is a block diagonal matrix
+    $$A=\begin{pmatrix}
+        J_{n_1}(\lambda_1)&&&\\
+        &J_{n_2}(\lambda_2)&&\\
+        &&\ddots&\\
+        &&&J_{n_k}(\lambda_k)
+    \end{pmatrix}$$
+    for $\{\lambda_i\}\in\mathbb C$ not necessarily distinct, $\sum_in_i=n$ and $J_r(\lambda)\in M_r(\mathbb C)$ are Jordan blocks of the form
+    $$J_r(\lambda)=\begin{pmatrix}
+        \lambda&1&&\\
+        &\ddots&\ddots&\\
+        &&\lambda&1\\
+        &&&\lambda
+    \end{pmatrix}$$
+\end{definition}
+\begin{theorem}
+    Every matrix $A\in M_n(\mathbb C)$ is similar to a matrix in JNF which is unique up to reordering the Jordan blocks.
+\end{theorem}
+\begin{proof}
+    Omitted.
+\end{proof}
+\begin{example}
+    For $n=2$, the possible JNFs are simply ($\lambda,\lambda_1,\lambda_2\in F,\lambda_1\neq\lambda_2$)
+    $$\begin{pmatrix}
+        \lambda_1&0\\
+        0&\lambda_2
+    \end{pmatrix},\begin{pmatrix}
+        \lambda&0\\
+        0&\lambda
+    \end{pmatrix},\begin{pmatrix}
+        \lambda&1\\
+        0&\lambda
+    \end{pmatrix}$$
+    with minimal polynomials $(t-\lambda_1)(t-\lambda_2),t-\lambda,(t-\lambda)^2$ respectively.\\
+    For $n=3$, the JNFs (and their respective minimal polynomials) are, up to reordering of the blocks, ($\lambda,\lambda_1,\lambda_2,\lambda_3\in F$, $\lambda_1,\lambda_2,\lambda_3$ all distinct)
+    $$\begin{pmatrix}
+        \lambda_1&&\\
+        &\lambda_2&\\
+        &&\lambda_3
+    \end{pmatrix}:(t-\lambda_1)(t-\lambda_2)(t-\lambda_3);\begin{pmatrix}
+        \lambda_1&&\\
+        &\lambda_2&\\
+        &&\lambda_2
+    \end{pmatrix}:(t-\lambda_1)(t-\lambda_2)$$
+    $$\begin{pmatrix}
+        \lambda_1&&\\
+        &\lambda_2&1\\
+        &&\lambda_2
+    \end{pmatrix}:(t-\lambda_1)(t-\lambda_2)^2;\begin{pmatrix}
+        \lambda&&\\
+        &\lambda&\\
+        &&\lambda
+    \end{pmatrix}:(t-\lambda)$$
+    $$\begin{pmatrix}
+        \lambda&&\\
+        &\lambda&1\\
+        &&\lambda
+    \end{pmatrix}:(t-\lambda)^2;\begin{pmatrix}
+        \lambda&1&\\
+        &\lambda&1\\
+        &&\lambda
+    \end{pmatrix}:(t-\lambda)^3$$
+\end{example}
+\begin{theorem}[Generalised Eigenspace Decomposition]
+    Let $V$ be a finite dimensional vector space over $\mathbb C$ and $\alpha\in L(V)$.
+    Let $\lambda+_1,\ldots,\lambda_k$ be distinct eigenvalues of $\alpha$ such that $m_\alpha(t)=(t-\lambda_1)^{c_1}\cdots(t-\lambda_k)^{c_k}$, then
+    $$V=\bigoplus_{i=1}^kV_j,V_j=\ker((\alpha-\lambda_j\operatorname{id})^{c_j})$$
+\end{theorem}
+Here $V_j$ is called the generalised eigenspace.
+\begin{remark}
+    When $\alpha$ is diagonalisable, then $c_j=1$ for all $j$, consequently $V=\bigoplus_j\ker(\alpha-\lambda_j\operatorname{id})$ as we already know.
+\end{remark}
+\begin{proof}
+    Define $p_j(t)=\prod_{i\neq j}(t-\lambda_i)^{c_i}$, then $\{p_j\}$ has no common factor, so we can find $q_1,\ldots,q_k$ such that $q_1p_1+\cdots+q_kp_k=1$.
+    Define $\pi_j=q_jp_j(\alpha)$, then it follows that $\sum_j\pi_j=\operatorname{id}$.
+    Also $(\alpha-\lambda_j\operatorname{id})^{c_j}\pi_j=0$, so $\operatorname{Im}\pi_j\subset V_j$, hence $V$ is the sum of all $V_j$.
+    To see this sum is direct, simply observe that $\pi_i\pi_j=\delta_{ij}\pi_i$ for all $i,j$, so $\pi_i|_{V_j}=\delta_{ij}\operatorname{id}$.
+    This completes the proof.
+\end{proof}
+\begin{remark}
+    1. This decomposition allows us to reduce the proof of JNF to just one eigenvalue, which can be done via the study of nilpotent matrices.
+    \footnote{That is if you want to do it the linear algebra way -- I like the $\mathbb C[X]$-module approach more.}
+    The relation is found from the observation
+    $$(J_m(\lambda)-\lambda\operatorname{id})^k=\begin{cases}
+        \begin{pmatrix}
+            0&I_{m-k}\\
+            0&0
+        \end{pmatrix}\text{, if $k<m$}\\
+        0\text{, otherwise}
+    \end{cases}$$
+    2. We can very easily compute $a_\lambda,g_\lambda$ and $c_\lambda$ if we know the JNF.
+    Indeed, $a_\lambda$ is the sum of sizes if the blocks with eigenvalue $\lambda$, $g_\lambda$ is the number of Jordan blocks with eigenvalue $\lambda$ and $c_\lambda$ is the size of the largest Jordan block with eigenvalue $\lambda$.
+    This can (sometimes) be used to compute the JNF as well.
+\end{remark}
+\begin{example}
+    Take
+    $$A=\begin{pmatrix}
+        0&-1\\
+        1&2
+    \end{pmatrix}$$
+    We want to find a basis in which $A$ is in JNF.
+    Now $\chi_A(t)=m_A(t)=(t-1)^2$, so the JNF is in the form
+    $$\begin{pmatrix}
+        1&1\\
+        0&1
+    \end{pmatrix}$$
+    We want the basis, which naturally consists of eigenvectors.
+    Indeed, $\ker(A-\operatorname{id})$ is spanned by $(1,-1)^\top$.
+    Choose $v_2$ such that $(A-\operatorname{id})v_2=v_1$, which is nonunique but we can take $v_2=(-1,0)^\top$.
+    So take the basis $\{v_1,v_2\}$ works.
+    To put it concretely,
+    $$A=\begin{pmatrix}
+        1&-1\\
+        -1&0
+    \end{pmatrix}\begin{pmatrix}
+        1&1\\
+        0&1
+    \end{pmatrix}\begin{pmatrix}
+        1&-1\\
+        -1&0
+    \end{pmatrix}^{-1}$$
+\end{example}

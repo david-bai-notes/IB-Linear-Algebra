@@ -1,0 +1,87 @@
+\section{Elementary Equations and Elementary Matrices}
+\begin{definition}
+    An elementary column operation on an $m\times n$ matrix $A$ are one of the followings:\\
+    (i) Swap columns $i,j$ with $i\neq j$.\\
+    (ii) Multiply the entire column $i$ by $\lambda\in F\setminus\{0\}$.\\
+    (iii) Add $\lambda$ times column $i$ to column $j$ where $\lambda\in F$.
+\end{definition}
+We can do row operations in a analogous (transposed) way.
+Something remarkable is that these operations are invertible.
+Instead of find the inverses one-by-one, we realise these operations via the action of elementary matrices.
+Let $E_{ij}$ be the matrix with $1$ on the $i,j$ entry and zero anywhere else, we have:
+\begin{definition}[Elementary Matrices]
+    The elementary matrices are $T_{ij}=I-E_{ii}-E_{jj}+E_{ij}+E_{ji}$ for $i\neq j$, $M_{i,\lambda}=I+(\lambda-1)E_{ij}$ for $\lambda\neq 0$ and $C_{i,j,\lambda}=I+\lambda E_{ij}$.
+\end{definition}
+Then, we easily see that $T_{ij}$ corresponds to column (row) operation (i), $M_{i,\lambda}$ to operation (ii) and $C_{i,j,\lambda}$ to operation (iii) via the operation of multiplying $A$ with the correspondinng matrix from the right (left).
+\begin{example}
+    $$\begin{pmatrix}
+        1&2\\
+        3&4
+    \end{pmatrix}\begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}=\begin{pmatrix}
+        2&1\\
+        4&3
+    \end{pmatrix}$$
+\end{example}
+\begin{proof}[Constructive Proof of Proposition \ref{eqv_form}]
+    It suffices to show that we can get from any matrix to
+    $$\left( \begin{array}{c|c}
+        I_r&0\\
+        \hline
+        0&0
+    \end{array} \right)$$
+    via elementary column and row operations.
+    Start with a matrix $A$.
+    If $A=0$ then we are done.
+    Otherwise pick $a_{ij}=\lambda\neq 0$ and swap rows $i$ and $1$ and then columns $j$ and $1$, after which $\lambda$ is at position $1,1$.
+    Then multiply column $1$ by $\lambda^{-1}$.
+    So we get $1$ at position $1,1$.
+    Now we clean up row $1$ and column $1$ via operation (iii) (both row and column).
+    Afterwards we can perform the same procedure on the submatrix by removing the first row and column.
+    By induction we can get the desired form at the end.
+\end{proof}
+There are a few variations on these row and column operations.
+The first one is Gauss' pivot algorithm.
+If one use only row operations, then one will reach the ``row echelon form'' (which we will define later) in the following way:
+Assume $a_{i1}\neq 0$ for some $i$.
+Otherwise just move on by deleting the first zero columns.
+Then swap rows $i$ and $1$ and divide row $1$ by $\lambda=a_{i1}$ to get $1$ at position $1,1$ and use (iii) to clean up the first column.
+And one can move on with the same method to the submatrix removing the first row and first column.
+Do this repeatedly and at the end we can get a matrix satisfying:\\
+1. For any $i$ here exists $k(i)\ge i$ such that $a_{ij}=0$ for any $j<k(i)$.\\
+2. $k(i)$ is increasing in $i$.\\
+3. Row $k(i)$ equals $e_{k(i)}$.\\
+And matrices satisfying these conditions are called matrices in row echelon form.
+Note that the operations above is exactly what we will get when solving a linear system of equations.
+So this can be an algorithm of doing that, which is now known as Gauss' pivot algorithm (or Gaussian elimination).\\
+Another variation is the following:
+\begin{lemma}
+    We can obtain the identity matrix from any invertible square matrix via column operations only.
+\end{lemma}
+By transpose, we can replace column operations by row operations.
+\begin{proof}
+    We argue by induction on the $k$ where we can guarantee to transform $A$ to the form
+    $$\begin{pmatrix}
+        I_k&0\\
+        \ast&\ast
+    \end{pmatrix}$$
+    The initial case is obvious.
+    Suppose we can do this for some $k$, we shall show that we can do this for $k+1$.
+    Now there must be some $j>k$ such that $a_{k+1,j}=\lambda\neq0$.
+    Otherwise the vector $e_{k+1}$ is not in the span of the column vectors of $A$, contradiction.
+    So we swap columns $k+1$ and $j$ and then divide column $k+1$ by $\lambda$.
+    This gets us $1$ at position $k+1,k+1$.
+    Then we can clean up the row $k+1$ by this $1$, which completes the induction process.
+\end{proof}
+This immediately provides an algorithm (a quite cost-effective one) for computing the inverse.
+As one can see, this algorithm is analogous to the algorithm of solving a nonsingular linear system.
+Also,
+\begin{proposition}
+    Any invertible matrix is a product of elementary matrices.
+\end{proposition}
+\begin{proof}
+    Writing the operations in the preceding lemma as a product of elementary matrices representing the operations gives the inverse of that matrix.
+    But any invertible matrix is the inverse of its own inverse.
+\end{proof}

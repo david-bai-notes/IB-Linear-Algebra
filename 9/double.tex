@@ -1,0 +1,63 @@
+\section{Properties of the Dual Map and Double Dual}
+\begin{lemma}
+    Let $V,W$ be vector spaces over $F$ and $\alpha\in L(V,W)$.
+    Let $\alpha^\ast\in L(W^\ast,V^\ast)$ be the dual map, then:\\1
+    1. $\ker\alpha^\ast=(\operatorname{Im}\alpha)^\circ$, so $\alpha^\ast$ is injective iff $\alpha$ is surjective.\\
+    2. $\operatorname{Im}\alpha^\ast\le(\ker\alpha)^\circ$ with equality if $V,W$ are finite dimensional, in which case it implies that $\alpha^\ast$ is surjective iff $\alpha$ is injective.
+\end{lemma}
+This is very important as it shows how we can understand $\alpha$ from $\alpha^\ast$, which is often simpler.
+\begin{proof}
+    1. Pick $\epsilon\in W^\ast$, then $\epsilon\in\ker\alpha^\ast$ iff $\alpha^\ast(\epsilon)=0$ iff $\epsilon\circ\alpha=0$ iff $\epsilon\in(\operatorname{Im}\alpha)^\circ$.\\
+    2. We first show that $\operatorname{Im}\alpha^\ast\le(\ker\alpha)^\circ$.
+    Indeed, for any $\epsilon\in\operatorname{Im}\alpha^\ast$, we have $\epsilon=\alpha^\ast(\phi)=\phi\circ\alpha$ for some $\phi\in W^\ast$.
+    But then for any $u\in \ker\alpha$ we have $\epsilon(u)=\phi\circ\alpha(u)=\phi(0)=0$, which means $\epsilon\in(\ker\alpha)^\circ$.
+    In finite dimension, pick bases $B,C$ of $V,W$ and we get
+    \begin{align*}
+        \dim\operatorname{Im}\alpha^\ast&=r(\alpha^\ast)=r([\alpha^\ast]_{C^\ast,B^\ast})=r([\alpha]_{B,C}^\top)\\
+        &=r([\alpha]_{B,C})=r(\alpha)\\
+        &=\dim V-\dim\ker\alpha\\
+        &=\dim (\ker\alpha)^\circ
+    \end{align*}
+    So they have the same dimension, hence equal.
+\end{proof}
+We now turn to a very important concept known as double dual.
+$V^\ast$ is a vector space too, so we can also construct its dual
+$$V^{\ast\ast}=L(V^\ast,F)=(V^\ast)^\ast$$
+Why is it important?
+Well, not much in finite dimensions, but in infinite dimensonal spaces, it is very hard to find obvious relations between $V$ and $V^\ast$.
+However, there is a canonical embedding of $V$ into $V^{\ast\ast}$.
+Indeed, pick $v\in V$, consider $\hat{v}:V^\ast\to F$ via $\epsilon\mapsto\epsilon(v)$, which is a well-defined element of $V^{\ast\ast}$.
+Quite ironically, our first theorem on this topic is about finite-dimensional spaces.
+\begin{theorem}
+    If $V$ is finite dimensional, then this operation $\hat{}:V\to V^{\ast\ast}$ we just described is an isomorphism of vector spaces.
+\end{theorem}
+So we can just identify $V^{\ast\ast}$ with $V$.
+\begin{proof}
+    Linearity is standard.
+    To see it is injective, let $e\in V\setminus\{0\}$ and extend $\{e\}$ to a basis $\{e,e_2,\ldots,e_n\}$ of $V$.
+    So the dual basis $(\epsilon,\epsilon_2,\ldots,\epsilon_n)$ would have $\hat{e}(\epsilon)=\epsilon(e)=1$.
+    Therefore $\hat{}$ has trivial kernel, hence injective.
+    It then follows that it is an isomorphism as $\dim V=\dim V^\ast=\dim V^{\ast\ast}$.
+\end{proof}
+\begin{remark}
+    In further linear analysis and functional analysis, we will see that $\hat{}$ remains injective for a huge class of infinite dimensional vector spaces (those of interests are often space of functions).
+    And there are many of them (called reflexive spaces) where $\hat{}$ is actually an isomorphism.
+    The theories emerged from here have numerous applications in analysis.
+\end{remark}
+\begin{lemma}
+    Let $V$ be a finite dimensional vector space over $F$ and $U\le V$.
+    Define $\hat{U}=\{\hat{u}:u\in U\}\le V^{\ast\ast}$.
+    Then $\hat{U}=U^{\circ\circ}=(U^\circ)^\circ$.
+\end{lemma}
+Thus we can identify $U^{\circ\circ}$ with $U$ too.
+\begin{proof}
+    Trivial.
+\end{proof}
+\begin{lemma}
+    Let $V$ be finite dimensional vector space over $F$ and $U_1,U_2\le V$, then:\\
+    1. $(U_1+U_2)^\circ=U_1^\circ\cap U_2^\circ$.\\
+    2. $(U_1\cap U_2)^\circ=U_1^\circ+U_2^\circ$.
+\end{lemma}
+\begin{proof}
+    Just write it out.
+\end{proof}

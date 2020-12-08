@@ -1,0 +1,118 @@
+\section{Linear Maps, Isomorphisms and the Rank-Nullity Theorem}
+\begin{definition}[Linear Map]
+    Let $V,W$ are vector spaces over $F$, a function $\alpha:V\to W$ is linear if for any $\lambda_1,\lambda_2\in F$ and $v_1,v_2\in V$,
+    $$\alpha(\lambda_1v_1+\lambda_2v_2)=\lambda_1\alpha(v_1)+\lambda_2\alpha(v_2)$$
+\end{definition}
+\begin{example}
+    1. Let $M$ be an $m\times n$ matrix, then $\alpha:\mathbb R^n\to\mathbb R^m$ via $x\mapsto Mx$ is a linear map.\\
+    2. The functional $\alpha:C([0,1])\to C^1([0,1])$ via
+    $$\alpha(f)(x)=\int_0^xf(t)\,\mathrm dt$$
+    is a linear map.\\
+    3. Fix $x\in[a,b]$, then the evaluation map $\alpha:C([a,b])\to\mathbb R$ via $f\mapsto f(x)$ is a linear map.
+\end{example}
+\begin{remark}
+    The identity map is a linear map.
+    Composition of linear maps is also a linear map.
+\end{remark}
+\begin{lemma}
+    Let $V,W$ be vector spaces over $F$ and $B$ a basis for $V$.
+    Let $\alpha_0:B\to W$ be a function, then there is a unique linear map $\alpha:V\to W$ that extends $\alpha_0$.
+\end{lemma}
+\begin{proof}
+    For any $(b_i)\in B$, necessarily $\alpha\left(\sum_i\lambda_ib_i\right)=\sum_i\lambda\alpha_0(b_i)$.
+    This is sufficient.
+\end{proof}
+\begin{remark}
+    This lemma is true for infinite dimensional vector spaces as well.
+    Often, to define linear map, we often just define its values on a basis and extend it by this lemma.
+\end{remark}
+\begin{corollary}
+    Two linear maps that agree on a basis are the same.
+\end{corollary}
+\begin{proof}
+    This is just the uniqueness statement.
+\end{proof}
+\begin{definition}
+    Let $V,W$ be vector spaces over $F$.
+    A linear bijection $\alpha:V\to W$ is an isomorphism (of vector spaces).
+    If such a map exists, then we say $V,W$ are isomorphic (as vector spaces), written as $V\cong W$.
+\end{definition}
+\begin{remark}
+    If $\alpha$ is an isomorphism, so is $\alpha^{-1}$.
+\end{remark}
+\begin{lemma}
+    $\cong$ is an equivalence relation on the class of all vector spaces over $F$.
+\end{lemma}
+\begin{proof}
+    Just check.
+\end{proof}
+\begin{theorem}
+    If $V$ is a vector space over $F$ of dimension $n$, then $V\cong F^n$.
+\end{theorem}
+\begin{proof}
+    Take a basis $\{b_1,\ldots,b_n\}$ of $V$, then
+    $$\alpha(x_1b_1+\cdots+x_nb_n)=(x_1,\ldots,x_n)$$
+    is an isomorphism.
+\end{proof}
+\begin{remark}
+    Choosing a basis of $V$ is then just equivalent to choosing an isomorphism from $V$ to $F^n$.
+\end{remark}
+\begin{theorem}
+    Let $V,W$ be finite dimensional vector spaces over $F$.
+    Then $V\cong W$ iff $\dim V=\dim W$
+\end{theorem}
+\begin{proof}
+    Any basis of $V$ induces a basis of $W$ via the isomorphism, so they have the same dimension.
+    Therefore are both isomorphic to $F^n$ where $n=\dim V=\dim W$.
+\end{proof}
+\begin{definition}
+    Let $\alpha:V\to W$ be a linear map.
+    We define the kernel of $\alpha$ to be $\ker\alpha=\{v\in V:\alpha(v)=0\}$ and the image to be $\operatorname{Im}\alpha=\alpha(V)=\{w\in W:\exists v\in V,\alpha(v)=w\}$.
+\end{definition}
+\begin{lemma}
+    $\ker\alpha\le V,\operatorname{Im}\alpha\le W$.
+\end{lemma}
+\begin{proof}
+    Obvious.
+\end{proof}
+\begin{example}
+    Take $\alpha:C^\infty(\mathbb R)\to C^\infty(\mathbb R)$ by $\alpha(f)(t)=f^{\prime\prime}(t)+f(t)$.
+    Then $\ker\alpha$ is spanned by $t\mapsto e^t$ and $t\mapsto e^{-t}$ and $\operatorname{Im}\alpha=C^{\infty}(\mathbb R)$.
+\end{example}
+\begin{theorem}
+    Let $V,W$ be vector spaces over $F$ and $\alpha:V\to W$ be linear, then $V/{\ker\alpha}\cong \operatorname{Im}(\alpha)$ via $v+\ker\alpha\mapsto \alpha(v)$.
+\end{theorem}
+\begin{proof}
+    Just check.
+\end{proof}
+\begin{definition}
+    The rank of $\alpha:V\to W$ is $r(\alpha)=\dim\operatorname{Im}\alpha$ and nullity is $n(\alpha)=\dim\ker\alpha$.
+\end{definition}
+Hence in the finite dimensional case, we can rewrite the preceding theorem to get
+\begin{theorem}[Rank-Nullity Theorem]
+    Let $\alpha:V\to W$ be linear where $V$ is finite dimensional.
+    Then $\dim V=r(\alpha)+n(\alpha)$.
+\end{theorem}
+\begin{proof}
+    Follows from the preceding theorem.
+\end{proof}
+\begin{corollary}[Classification of Isomorphism]
+    Let $V,W$ be finite dimensional vector spaces with $\dim V=\dim W$ and $\alpha:V\to W$ be linear, then the followings are equivalent:\\
+    1. $\alpha$ is injective.\\
+    2. $\alpha$ is surjective.\\
+    3. $\alpha$ is an isomorphism.
+\end{corollary}
+\begin{proof}
+    Follows immediately by considering dimensions.
+\end{proof}
+\begin{example}
+    Consider
+    $$V=\left\{ \begin{pmatrix}
+        x\\
+        y\\
+        z
+    \end{pmatrix}\in\mathbb R^3:x+y+z=0\right\}$$
+    We want to compute $\dim V$.
+    Consider $\alpha:\mathbb R^3\to\mathbb R$ via $(x,y,z)^\top\mapsto x+y+z$, then $r(\alpha)=1$ and $n(\alpha)=V$, so $\dim V=3-1=2$.
+    Geometrically, $V$ is just a plane with normal $(1,1,1)^\top$.
+\end{example}

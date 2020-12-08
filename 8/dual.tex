@@ -1,0 +1,80 @@
+\section{Dual Space and Dual Maps}
+\begin{definition}
+    Let $V$ be a vector space over $F$, we define the dual space $V^\ast$ of $V$ to be the set of linear maps from $V$ to $F$, i.e. $V^\ast=L(V,F)$.\\
+    We call linear maps $V\to F$ as linear forms.
+\end{definition}
+\begin{example}
+    1. The map $\operatorname{tr}:M_{n,n}(F)\to F$ via $A=(a_{ij})\mapsto\sum_ia_{ii}$ is a linear form, so $\operatorname{tr}\in (M_{n,n}(F))^\ast$.\\
+    2. For a function $f:\in C^{\infty}([0,1],\mathbb R)$, we can define the map $T_f:C^{\infty}([0,1],\mathbb R)$ via
+    $$T_f(\phi)=\int_0^1f(x)\phi(x)\,\mathrm dx$$
+    An interesting thing is, if we are given all information about $T_f$, can we recover $f$?
+    The answer is yes and is left as an exercise.
+    This idea comes from quantum mechanics, where you only get the information about $T_f$ by physical measurements but you want information about $f$.
+\end{example}
+There is a natural way of finding a basis for the dual space.
+\begin{lemma}
+    Let $V$ be a vector space over $F$ with a finite basis $B=\{e_1,\ldots,e_n\}$, then there exists a basis for $V^\ast$ given by
+    $B^\ast=\{\epsilon_1,\ldots,\epsilon_n\}$ where $\epsilon_j(\sum_ia_ie_i)=a_j$ for $1\le j\le n$.
+\end{lemma}
+\begin{definition}
+    The basis $B^\ast$ in the preceding lemma is called the dual basis.
+\end{definition}
+\begin{remark}
+    If we introduce the Kronecker delta
+    $$\delta_{ij}=\begin{cases}
+        1\text{, if $i=j$}\\
+        0\text{, otherwise}
+    \end{cases}$$
+    then we can define $\epsilon_j$ by extending $\epsilon_j(e_i)=\delta_{ij}$.
+\end{remark}
+\begin{proof}
+    If there is some $\lambda_j\in F$ such that $\sum_j\lambda_j\epsilon_j=0$, then in particular the evaluation of the left hand side at $e_i$ is zero for each $i$.
+    But $\epsilon_j(e_i)=0$, so $\lambda_i=0$ for each $i$.\\
+    To see this is spanning, one just observe that $\alpha=\sum_j\alpha(e_j)\epsilon_j$ for any linear form $\alpha$.
+\end{proof}
+\begin{corollary}
+    If $V$ is finite dimensional, then $\dim V^\ast=\dim V$.
+\end{corollary}
+\begin{remark}
+    It is convenient to think of $V^\ast$ as the space of row vectors of length $n$ over $F$.
+    Indeed, if we have a basis $\{e_i\}$ of $V$ and the corresponding dual basis $\{\epsilon_i\}$ for $V^\ast$, then via calculation we can obtain $\alpha(x)=\sum_i\alpha_ix_i$ where $\alpha=\sum_i\alpha_i\epsilon_i$ and $x=\sum_ix_ie_i$.
+\end{remark}
+\begin{definition}
+    If $U\subset V$ is a subset of the vector space $V$, then the annihilator of $U$ is
+    $$U^\circ=\{\alpha\in V^\ast:\forall u\in U,\alpha(u)=0\}$$
+\end{definition}
+\begin{lemma}
+    $U^\circ\le V^\ast$ and if $U\le V$ and $\dim V$ is finite, then $\dim V=\dim U+\dim U^\circ$.
+\end{lemma}
+\begin{proof}
+    Quite obvious that $U^\circ\le V^\ast$.
+    To see the identity, write $n=\dim V$ and extend a basis $\{e_1,\ldots,e_k\}$ of $U$ to a basis $\{e_1,\ldots,e_n\}$ of $V$.
+    Let $\{\epsilon_1,\ldots,\epsilon_n\}$ be the dual basis.
+    Then it becomes obvious that $U^\circ=\langle\{\epsilon_{k+1},\ldots,\epsilon_n\}\rangle$, which gives the identity.
+\end{proof}
+\begin{lemma}
+    Let $V,W$ be vector spaces over $F$ and $\alpha\in L(V,W)$.
+    Then the map $\alpha^\ast:W^\ast\to V^\ast$ sending $\epsilon$ to $\epsilon\circ\alpha$ is linear.
+\end{lemma}
+\begin{proof}
+    Obvious.
+\end{proof}
+\begin{definition}
+    This map $\alpha^\ast$ is called the dual map of $\alpha$.
+\end{definition}
+\begin{proposition}
+    Let $V,W$ be finite dimensional vector spaces over $F$ with bases $B,C$.
+    Let $B^\ast,C^\ast$ be the dual bases of $V^\ast,W^\ast$, then $[\alpha^\ast]_{C^\ast,B^\ast}=[\alpha]_{B,C}^\top$.
+\end{proposition}
+\begin{proof}
+    Just write it down.
+\end{proof}
+\begin{lemma}
+    Let $E,F$ be bases of $V$ and $P=[\operatorname{id}]_{F,E}$ be the change-of-basis matrix from $F$ to $E$.
+    Let $E^\ast,F^\ast$ be the corresponding dual bases, then the change-of-basis matrix from $F^\ast$ to $E^\ast$ is $(P^{-1})^\top$.
+\end{lemma}
+\begin{proof}
+    We have
+    $$[\operatorname{id}]_{F^\ast,E^\ast}=[\operatorname{id}]^\top_{E,F}=(P^{-1})^\top$$
+    as desired.
+\end{proof}
